@@ -8,7 +8,7 @@ import {RiFolderUploadFill} from 'react-icons/ri'
 const SideBar = () => {
     return (
         <>
-            <div className=' shadow-xl h-screen fixed'>
+            <div className=' shadow-xl bg-base-200 h-screen fixed z-20'>
                 <div className=' px-8 my-16  w-full'>
 
                     <div>
@@ -16,14 +16,14 @@ const SideBar = () => {
                     </div>
                     <div className="mt-10 dropdown dropdown-bottom">
                         <label tabIndex={0} className="btn m-1"><GoPlus className='mr-2'/> New</label>
-                        <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-black rounded-box w-52">
+                        <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-300 rounded-box w-52">
                             <li><a><AiFillFolder />New Folder</a></li>
                             <li><a><AiOutlineCloudUpload />Upload File</a></li>
                             <li><a><RiFolderUploadFill />Upload Folder</a></li>
                         </ul>
                     </div>
 
-                    <ul className="menu menu-compact lg:menu-normal bg-base-100 w-56 p-2 rounded-box">
+                    <ul className="menu menu-compact lg:menu-normal bg-base-200 w-56 p-2 rounded-box">
                         <li><a><CiHardDrive /> My Disk</a></li>
                         <li><a><AiFillStar />Starred</a></li>
                         <li><a><AiOutlineShareAlt />Shared with me</a></li>
