@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import SideBar from './components/sidebar/SideBar'
 
 
 
@@ -7,7 +8,7 @@ function App() {
 
   return (
     <>
-      <h1 className='text-blue-400'>hello</h1>
+      <SideBar />
     </>
   )
 }
