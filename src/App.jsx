@@ -1,6 +1,7 @@
 import Layout from './layout/layout'
 import Drive from './pages/home/Drive'
 import View from './components/activity/View'
+import CreateFolder from './components/activity/CreateFolder'
 
 
 
@@ -16,6 +17,8 @@ function App() {
           <Drive />
         </div>
       </Layout>
+
+      
     </>
   )
 }

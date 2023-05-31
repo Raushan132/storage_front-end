@@ -3,6 +3,7 @@
 const TopBar = () => {
     return (
         <>
+          
             <div className="navbar bg-base-200 fixed z-10">
                
                 <div className="flex-grow pl-72 gap-2">

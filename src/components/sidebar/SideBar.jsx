@@ -3,9 +3,14 @@ import {AiFillStar, AiOutlineShareAlt, AiFillMessage, AiOutlineCloudUpload, AiFi
 import {FaTrashAlt} from 'react-icons/fa'
 import {GoPlus} from 'react-icons/go'
 import {RiFolderUploadFill} from 'react-icons/ri'
+import CreateFolder from '../activity/CreateFolder'
+import { useState } from 'react'
 
 
 const SideBar = () => {
+
+    const[createFolder,setCreateFolder] = useState(false)
+    console.log(createFolder)
 
     const fileUploadHandle= (event)=>{
          
@@ -16,6 +21,7 @@ const SideBar = () => {
 
     return (
         <>
+            {createFolder && <CreateFolder />}
             <div className=' shadow-xl bg-base-200 h-screen fixed z-20'>
                 <div className=' px-8 my-16  w-full'>
 
@@ -25,7 +31,7 @@ const SideBar = () => {
                     <div className="mt-10 dropdown dropdown-bottom">
                         <label tabIndex={0} className="btn m-1"><GoPlus className='mr-2'/> New</label>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-300 rounded-box w-52">
-                            <li><a><AiFillFolder />New Folder</a></li>
+                            <li><div onClick={()=>setCreateFolder(true)}><AiFillFolder />New Folder</div></li>
                             <li><div >
                                 <AiOutlineCloudUpload />
                                 <label htmlFor='fileUpload'>Upload File</label>
