@@ -1,16 +1,21 @@
-import { useState } from 'react'
-import SideBar from './components/sidebar/SideBar'
-import TopBar from './components/topbar/TopBar'
+import Layout from './layout/layout'
+import Drive from './pages/home/Drive'
+import View from './components/activity/View'
 
 
 
 function App() {
- 
+
+
 
   return (
     <>
-      <TopBar />
-      <SideBar />
+      <Layout>
+        <View />
+        <div className='mt-8'>
+          <Drive />
+        </div>
+      </Layout>
     </>
   )
 }

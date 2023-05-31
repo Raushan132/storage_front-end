@@ -6,6 +6,14 @@ import {RiFolderUploadFill} from 'react-icons/ri'
 
 
 const SideBar = () => {
+
+    const fileUploadHandle= (event)=>{
+         
+        console.log(event.target.files[0]?.name)
+         
+    }
+
+
     return (
         <>
             <div className=' shadow-xl bg-base-200 h-screen fixed z-20'>
@@ -18,8 +26,16 @@ const SideBar = () => {
                         <label tabIndex={0} className="btn m-1"><GoPlus className='mr-2'/> New</label>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-300 rounded-box w-52">
                             <li><a><AiFillFolder />New Folder</a></li>
-                            <li><a><AiOutlineCloudUpload />Upload File</a></li>
-                            <li><a><RiFolderUploadFill />Upload Folder</a></li>
+                            <li><div >
+                                <AiOutlineCloudUpload />
+                                <label htmlFor='fileUpload'>Upload File</label>
+                                <input type="file" multiple onChange={fileUploadHandle} id="fileUpload" hidden/>
+                                </div></li>
+                            <li><div>
+                                <RiFolderUploadFill />
+                                <label htmlFor='folderUpload'>Upload Folder</label>
+                                <input type="file" webkitdirectory="true" onChange={fileUploadHandle} id="folderUpload" hidden/>
+                            </div></li>
                         </ul>
                     </div>
 
