@@ -49,4 +49,317 @@
   "isPublic": false,
   "isFolder": false,
   "_class": "com.storage.model.CustomFiles"
-}]
+},
+
+
+{
+  "_id": "9ca830d5-c525-4bc9-a918-f29f31657957",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "shib inu.png",
+  "parentFolderId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462674456"
+    }
+  },
+  "fileSize": "215977",
+  "description": "",
+  "fileType": "image/png",
+  "extension": "png",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": false,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "1b03a69e-0603-46b2-abf5-1e3419385cb2",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "test",
+  "parentFolderId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462747749"
+    }
+  },
+  "fileType": "FOLDER",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": true,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "e40bcd99-a599-416e-94b2-bdff7b1cfeb1",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "frog.jpg",
+  "parentFolderId": "1b03a69e-0603-46b2-abf5-1e3419385cb2",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462827233"
+    }
+  },
+  "fileSize": "662498",
+  "description": "",
+  "fileType": "image/jpeg",
+  "extension": "jpg",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": false,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "9ca830d5-c525-4bc9-a918-f29f31657957",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "shib inu.png",
+  "parentFolderId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462674456"
+    }
+  },
+  "fileSize": "215977",
+  "description": "",
+  "fileType": "image/png",
+  "extension": "png",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": false,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "1b03a69e-0603-46b2-abf5-1e3419385cb2",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "test",
+  "parentFolderId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462747749"
+    }
+  },
+  "fileType": "FOLDER",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": true,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "e40bcd99-a599-416e-94b2-bdff7b1cfeb1",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "frog.jpg",
+  "parentFolderId": "1b03a69e-0603-46b2-abf5-1e3419385cb2",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462827233"
+    }
+  },
+  "fileSize": "662498",
+  "description": "",
+  "fileType": "image/jpeg",
+  "extension": "jpg",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": false,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "9ca830d5-c525-4bc9-a918-f29f31657957",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "shib inu.png",
+  "parentFolderId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462674456"
+    }
+  },
+  "fileSize": "215977",
+  "description": "",
+  "fileType": "image/png",
+  "extension": "png",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": false,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "1b03a69e-0603-46b2-abf5-1e3419385cb2",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "test",
+  "parentFolderId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462747749"
+    }
+  },
+  "fileType": "FOLDER",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": true,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "e40bcd99-a599-416e-94b2-bdff7b1cfeb1",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "frog.jpg",
+  "parentFolderId": "1b03a69e-0603-46b2-abf5-1e3419385cb2",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462827233"
+    }
+  },
+  "fileSize": "662498",
+  "description": "",
+  "fileType": "image/jpeg",
+  "extension": "jpg",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": false,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "9ca830d5-c525-4bc9-a918-f29f31657957",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "shib inu.png",
+  "parentFolderId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462674456"
+    }
+  },
+  "fileSize": "215977",
+  "description": "",
+  "fileType": "image/png",
+  "extension": "png",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": false,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "1b03a69e-0603-46b2-abf5-1e3419385cb2",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "test",
+  "parentFolderId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462747749"
+    }
+  },
+  "fileType": "FOLDER",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": true,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "e40bcd99-a599-416e-94b2-bdff7b1cfeb1",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "frog.jpg",
+  "parentFolderId": "1b03a69e-0603-46b2-abf5-1e3419385cb2",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462827233"
+    }
+  },
+  "fileSize": "662498",
+  "description": "",
+  "fileType": "image/jpeg",
+  "extension": "jpg",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": false,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "9ca830d5-c525-4bc9-a918-f29f31657957",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "s jjhkjhjkhkjhkjhib inu.png",
+  "parentFolderId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462674456"
+    }
+  },
+  "fileSize": "215977",
+  "description": "",
+  "fileType": "image/png",
+  "extension": "png",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": false,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "1b03a69e-0603-46b2-abf5-1e3419385cb2",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "test",
+  "parentFolderId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462747749"
+    }
+  },
+  "fileType": "FOLDER",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": true,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "e40bcd99-a599-416e-94b2-bdff7b1cfeb1",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "frog.jpg",
+  "parentFolderId": "1b03a69e-0603-46b2-abf5-1e3419385cb2",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462827233"
+    }
+  },
+  "fileSize": "662498",
+  "description": "",
+  "fileType": "image/jpeg",
+  "extension": "jpg",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": false,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "9ca830d5-c525-4bc9-a918-f29f31657957",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "shib inu.png",
+  "parentFolderId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462674456"
+    }
+  },
+  "fileSize": "215977",
+  "description": "",
+  "fileType": "image/png",
+  "extension": "png",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": false,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "1b03a69e-0603-46b2-abf5-1e3419385cb2",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "test",
+  "parentFolderId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462747749"
+    }
+  },
+  "fileType": "FOLDER",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": true,
+  "_class": "com.storage.model.CustomFiles"
+},{
+  "_id": "e40bcd99-a599-416e-94b2-bdff7b1cfeb1",
+  "userId": "05fbb3d2-fd10-4ca7-9295-b2dc564aed30",
+  "fileName": "frog.jpg",
+  "parentFolderId": "1b03a69e-0603-46b2-abf5-1e3419385cb2",
+  "dateOfOpened": {
+    "$date": {
+      "$numberLong": "1685462827233"
+    }
+  },
+  "fileSize": "662498",
+  "description": "",
+  "fileType": "image/jpeg",
+  "extension": "jpg",
+  "hasStar": false,
+  "isPublic": false,
+  "isFolder": false,
+  "_class": "com.storage.model.CustomFiles"
+}
+
+
+
+]
