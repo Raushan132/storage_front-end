@@ -1,0 +1,2 @@
+export const CREATE_FOLDER_VISIBLE=true
+export const CREATE_FOLDER_NOT_VISIBLE=false

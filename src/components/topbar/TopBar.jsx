@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 
 const TopBar = () => {
@@ -23,10 +24,10 @@ const TopBar = () => {
                         </label>
                         <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-200 rounded-box w-52">
                             <li>
-                                <a className="justify-between">
+                                <Link to="/profile" className="justify-between">
                                     Profile
                                     <span className="badge">New</span>
-                                </a>
+                                </Link>
                             </li>
                             <li><a>Settings</a></li>
                             <li><a>Logout</a></li>

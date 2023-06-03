@@ -6,14 +6,27 @@ import { RiFolderUploadFill } from 'react-icons/ri'
 import CreateFolder from '../activity/CreateFolder'
 import { useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { createFolderVisible } from '../../redux/create_Folder/createFolderAction'
 
 
 const SideBar = () => {
 
-    const [createFolder, setCreateFolder] = useState(false)
+    
+    const iscreateFolderVisible= useSelector(state=> state?.isCreateFolderVisible);
+    const dispatch = useDispatch()
+    const handleCreateFolder = ()=>{
+         if(!iscreateFolderVisible)
+            dispatch(createFolderVisible())
+    }
+
+
+
+
     const [progress, setProgress] = useState(0);
     const [cancelRequests,setCancelRequests] =useState()
-    console.log(createFolder)
+    console.log(iscreateFolderVisible)
 
     const onUploadProgress = (progressEvent) => {
         const { loaded, total } = progressEvent;
@@ -69,7 +82,7 @@ const SideBar = () => {
 
     return (
         <>
-            {createFolder && <CreateFolder />}
+            {iscreateFolderVisible && <CreateFolder />}
             <div className=' shadow-xl bg-base-200 h-screen fixed z-20'>
                 <div className=' px-8 my-16  w-full'>
 
@@ -79,7 +92,7 @@ const SideBar = () => {
                     <div className="mt-10 dropdown dropdown-bottom">
                         <label tabIndex={0} className="btn m-1"><GoPlus className='mr-2' /> New</label>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-300 rounded-box w-52">
-                            <li><div onClick={() => setCreateFolder(true)}><AiFillFolder />New Folder</div></li>
+                            <li><div onClick={handleCreateFolder}><AiFillFolder />New Folder</div></li>
                             <li><div >
                                 <AiOutlineCloudUpload />
                                 <label htmlFor='fileUpload'>Upload File</label>
@@ -94,11 +107,11 @@ const SideBar = () => {
                     </div>
 
                     <ul className="menu menu-compact lg:menu-normal bg-base-200 w-56 p-2 rounded-box">
-                        <li><a><CiHardDrive /> My Disk</a></li>
-                        <li><a><AiFillStar />Starred</a></li>
-                        <li><a><AiOutlineShareAlt />Shared with me</a></li>
-                        <li><a><AiFillMessage />Message</a></li>
-                        <li><a><FaTrashAlt />Trash</a></li>
+                        <li><Link to="/"><CiHardDrive /> My Disk</Link></li>
+                        <li><Link to="/starred"><AiFillStar />Starred</Link></li>
+                        <li><Link to="/shared-with-me"><AiOutlineShareAlt />Shared with me</Link></li>
+                        <li><Link to="/messages"><AiFillMessage />Message</Link></li>
+                        <li><Link to="/trash"><FaTrashAlt />Trash</Link></li>
                     </ul>
 
 
