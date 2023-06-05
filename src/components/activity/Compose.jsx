@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 const Compose = ({composeVisible}) => {
     
     return (
-        <motion.div className='fixed right-16 bottom-10 w-96 bg-base-200'
+        <motion.div className='fixed z-10 right-16 bottom-10 w-96 bg-base-200 shadow-xl'
         initial={{ y: '150vw' }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}

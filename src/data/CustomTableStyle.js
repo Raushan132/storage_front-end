@@ -1,9 +1,10 @@
  const customStyles = {
     rows: {
         style: {
-            minHeight: '72px', // override the row height
+             // override the row height
             background: '#323843',
             color:'#9ca2b0',
+            
             
         },
     },

@@ -13,13 +13,13 @@ const GridView = () => {
     console.log(files)
 
     return (
-        <div>
+        <div className=' overflow-x-hidden overflow-y-auto'>
             <div>
                 <div className='text-2xl my-6'>Folders</div>
-                <div className='grid grid-cols-4 mx-4 gap-6'>
+                <div className='flex flex-wrap  gap-6'>
                     {folders.map(folder => {
                         return (
-                            <div className='text-lg flex items-center w-48 rounded-lg px-4 py-2 justify-between bg-base-300 ' key={folder.fileId}>
+                            <div className='text-lg flex items-center  w-48 rounded-lg px-4 py-2 justify-between bg-base-300 ' key={folder.fileId}>
                                 <div className='flex justify-center gap-2 items-center'>
                                     <div className='text-xl'><AiFillFolder /></div>
                                     <div>
@@ -34,10 +34,10 @@ const GridView = () => {
             </div>
             <div>
                 <div className='text-2xl my-6'>Files</div>
-                <div className='grid grid-cols-4 mx-4 gap-6'>
+                <div className='flex flex-wrap  gap-6'>
                     {files.map(file => {
                         return (
-                            <div className='text-md flex items-center w-56 rounded-lg px-4 py-2 justify-between bg-base-300 ' key={file?.fileId}>
+                            <div className='text-md flex items-center w-48 rounded-lg px-4 py-2 justify-between bg-base-300 ' key={file?.fileId}>
                                 <div className='flex justify-center gap-2 items-center'>
                                     <div className='text-xl'><AiFillFile /></div>
                                     <div className='flex w-28'>

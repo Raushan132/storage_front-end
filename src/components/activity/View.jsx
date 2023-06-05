@@ -5,6 +5,8 @@ import Breadcrumbs from './Breadcrumbs'
 import { useDispatch, useSelector } from 'react-redux'
 import { GRIDVIEW,LISTVIEW } from '../../redux/view_layout/viewTypes'
 import { gridView, listView } from '../../redux/view_layout/view_actions'
+import { viewDetailClose, viewDetailOpen } from '../../redux/view_details/detailsActions'
+import { VIEW_DETAIL_OPEN } from '../../redux/view_details/detailsType'
 
 
 const View = () => {
@@ -12,6 +14,7 @@ const View = () => {
   
 
  const currentView = useSelector((state=> state?.viewLayout))
+ const isDetailsVisible = useSelector((state=> state?.isDetailsVisible))
  const dispatch = useDispatch();
  console.log(currentView)
 
@@ -20,9 +23,14 @@ const View = () => {
    
   }
 
+  const handleViewDatails = () =>{
+    isDetailsVisible === VIEW_DETAIL_OPEN ? dispatch(viewDetailClose()) : dispatch(viewDetailOpen())
+    console.log("view.jsx view detail handle function:", isDetailsVisible)
+  }
+
   return (
     <>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center pr-8'>
         <Breadcrumbs path={breadcrumbs} />
         <div className='flex justify-center items-center gap-2'>
           <div className="tooltip tooltip-bottom" data-tip={currentView === GRIDVIEW ? 'List' :'Grid'}>
@@ -31,7 +39,7 @@ const View = () => {
             </div>
           </div>
 
-          <div className="tooltip tooltip-bottom" data-tip='view detail'>
+          <div className="tooltip tooltip-bottom" data-tip='view detail' onClick={handleViewDatails}>
             <div className='hover:bg-gray-500 rounded-full w-10 h-10 flex justify-center items-center transition-all cursor-pointer'>
               <AiOutlineInfoCircle />
             </div>

@@ -107,7 +107,7 @@ const SideBar = () => {
                     </div>
 
                     <ul className="menu menu-compact lg:menu-normal bg-base-200 w-56 p-2 rounded-box">
-                        <li><Link to="/"><CiHardDrive /> My Disk</Link></li>
+                        <li draggable={false}><Link to="/"><CiHardDrive /> My Disk</Link></li>
                         <li><Link to="/starred"><AiFillStar />Starred</Link></li>
                         <li><Link to="/shared-with-me"><AiOutlineShareAlt />Shared with me</Link></li>
                         <li><Link to="/messages"><AiFillMessage />Message</Link></li>

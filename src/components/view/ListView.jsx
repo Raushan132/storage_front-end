@@ -87,16 +87,18 @@ const ListView = () => {
     console.log(data);
   return (
     <>
+    
 
        <DataTable
             columns={columns}
             data={data}
             customStyles={customStyles}
             style={{height:'100vh',background:'#f00'}}
-           
             
             
-        />
+            
+            />
+    
       
     </>
   )

@@ -1,6 +1,8 @@
 import { BsFillPencilFill, BsFillInboxFill, BsFillSendFill } from 'react-icons/bs'
 import Compose from '../../components/activity/Compose'
 import { useState } from 'react'
+import Inbox from './Inbox';
+import  messageData  from '../../data/messageData';
 
 const Messages = () => {
 
@@ -37,6 +39,12 @@ const Messages = () => {
      composeVisible &&   <div> <Compose composeVisible={handleComposeVisible} />  </div>
     }
 
+
+       <div>
+
+              <Inbox data={messageData} />
+
+       </div>
 
       </div>
 
