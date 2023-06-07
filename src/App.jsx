@@ -1,38 +1,43 @@
 import Layout from './layout/layout'
 import Drive from './pages/home/Drive'
 import View from './components/activity/View'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useMatch } from 'react-router-dom'
 import Trash from './pages/trash/Trash'
 import Starred from './pages/starred/Starred'
 import Shared from './pages/share/Shared'
 import Messages from './pages/messages/Messages'
 import Profile from './pages/profile/Profile'
 import EditProfile from './pages/profile/EditProfile'
-import Login from './pages/authentication/Login'
+import Login from './pages/authentication/Auth'
+import Auth from './pages/authentication/Auth'
 
 
 
 function App() {
 
- const path= useLocation()
- const isLoginPath= path.pathname !=='/login'
+ 
+ const path = useMatch("/user/*")
+
  
 
 
   return (
     <>
-     { isLoginPath && <Layout>
+     { path && <Layout>
         <View />
         <div className='mt-8'>
           <Routes>
-              <Route path='/' element={<Drive />} />
-              <Route path='/starred' element={<Starred />} />
-              <Route path='/shared-with-me' element={<Shared />} />
-              <Route path='/messages' element={<Messages />} />
-              <Route path='/trash' element={<Trash />} />
+             <Route path="/user">
 
-              <Route path='/profile' element={<Profile />} />
-              <Route path='/editProfile' element={<EditProfile />} />
+              <Route index path='/user/drive' element={<Drive />} />
+              <Route path='/user/starred' element={<Starred />} />
+              <Route path='/user/shared-with-me' element={<Shared />} />
+              <Route path='/user/messages' element={<Messages />} />
+              <Route path='/user/trash' element={<Trash />} />
+
+              <Route path='/user/profile' element={<Profile />} />
+              <Route path='/user/editProfile' element={<EditProfile />} />
+             </Route>
 
           </Routes>
         </div>
@@ -40,7 +45,9 @@ function App() {
       }
 
       {
-        !isLoginPath && <Login />
+        path===null &&  <Routes>
+                               <Route path="/auth" element={<Auth />} />
+                         </Routes> 
       }
       
     </>
