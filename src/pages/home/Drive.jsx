@@ -6,12 +6,27 @@ import View_details from "../../components/activity/View_details"
 import { motion } from "framer-motion"
 import { VIEW_DETAIL_OPEN } from "../../redux/view_details/detailsType"
 
+import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
+import { document } from "postcss"
+import Authorization from "../../util/Authorization"
+
 
 const Drive = () => {
+ 
+  // const navigate = useNavigate()
+  // useEffect(()=>{
+  //   if(document.cookie=="")
 
+  //     navigate("/auth",{replace:true})
+    
+  // },[]);
+
+   
+ 
   const currentView = useSelector(state=> state?.viewLayout)
   const isViewDetailsVisible = useSelector(state => state?.isDetailsVisible) === VIEW_DETAIL_OPEN
-
+  
   const handleDrop= (e)=>{
       e.preventDefault();
       e.stopPropagation();

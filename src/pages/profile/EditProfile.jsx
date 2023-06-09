@@ -41,7 +41,7 @@ const EditProfile = () => {
                     </div>
                 </div>
                 <div className='flex  gap-4 w-96 mx-16 justify-end'>
-                    <Link to="/profile" className='btn'>Cancel</Link>
+                    <Link to="/user/profile" className='btn'>Cancel</Link>
                     <span className='btn btn-primary'>Save</span>
                 </div>
             </from>

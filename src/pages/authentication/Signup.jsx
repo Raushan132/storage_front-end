@@ -7,7 +7,7 @@ const Signup = () => {
                 <div className='flex flex-col gap-5 py-5 items-center'>
 
                     <div>
-                        <input type="text" className="w-64 px-2"  placeholder='Email' />
+                        <input type="email" className="w-64 px-2"  placeholder='Email' />
                     </div>
                     <div>
                         <input type="password" className="w-64 px-2" placeholder='Password' />
