@@ -1,14 +1,24 @@
 import axios from 'axios'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
+import { useIsAuthenticated, useSignIn } from 'react-auth-kit'
 import { useNavigate } from 'react-router-dom'
 
 
 const Login = () => {
 
+
+    const navigate = useNavigate();
+    const isAuthenticated = useIsAuthenticated()
+    
+
+    isAuthenticated() &&  navigate("/user/drive")
    
+   
+        
+
+    const signIn = useSignIn()
     const email= useRef()
     const password= useRef()
-    const navigate = useNavigate();
 
 
    const handleSubmit = (e)=>{
@@ -21,8 +31,18 @@ const Login = () => {
           console.log(formData)
           axios.post("http://localhost:8081/signIn",formData,{auth:{username:formData.username,password:formData.password}})
           .then(res=> {
-            document.cookie=  `token=${res.headers.getAuthorization()}; expires=${res.headers?.expires};`
-            localStorage.setItem("userId",res.data.userId)
+            const now = new Date(Number(res.headers?.expires));
+            console.log("Date:",typeof(res.headers?.expires))
+            console.log(now);
+            console.log(now.getTime())
+            signIn({
+                token: res.headers.getAuthorization(),
+                expiresIn: 600000,
+                tokenType: "String",
+                authState:{userId: res.data.userId}
+            })
+            // document.cookie=  `token=${res.headers.getAuthorization()}; expires=${res.headers?.expires};`
+            // localStorage.setItem("userId",res.data.userId)
             navigate("/user/drive")
             
         })

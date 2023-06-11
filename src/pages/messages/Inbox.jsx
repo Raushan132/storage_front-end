@@ -7,7 +7,7 @@ import customStyles from '../../data/CustomTableStyle'
 
 const Inbox = ({data}) => {
   
-     console.log(data.map(d=>d.name))
+     
 
     const columns=[{
         

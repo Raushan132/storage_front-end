@@ -16,8 +16,7 @@ const View = () => {
  const currentView = useSelector((state=> state?.viewLayout))
  const isDetailsVisible = useSelector((state=> state?.isDetailsVisible))
  const dispatch = useDispatch();
- console.log(currentView)
-
+ 
   const handleView = () => {
     currentView === GRIDVIEW?  dispatch(listView(LISTVIEW)):dispatch(gridView(GRIDVIEW));
    

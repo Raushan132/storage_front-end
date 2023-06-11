@@ -27,7 +27,7 @@ export const fetchUserFailure = (error) => {
 
 
 export const fetchUsers = () => {
-    console.log("fetching the data with",getCookie())
+   
     return (dispatch) => {
         dispatch(fetchUserRequest)
         axios.get(`${baseUrl}/user`,{
@@ -45,4 +45,15 @@ export const fetchUsers = () => {
                 dispatch(fetchUserFailure(errMsg))
             })
     }
+}
+
+export const uploadUserImg = (userId,formData)=>{
+   
+    axios.post(`${baseUrl}/uploadImg/${userId}`,formData,{
+        headers:{
+          "Authorization": getCookie()
+        }
+      }).then(res=>{
+        console.log(res.data)
+      })
 }

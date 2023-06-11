@@ -26,7 +26,7 @@ const SideBar = () => {
 
     const [progress, setProgress] = useState(0);
     const [cancelRequests,setCancelRequests] =useState()
-    console.log(iscreateFolderVisible)
+    
 
     const onUploadProgress = (progressEvent) => {
         const { loaded, total } = progressEvent;

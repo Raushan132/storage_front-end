@@ -1,36 +1,62 @@
-import React, { useEffect } from 'react'
-import profileImg from '../../assets/profile.png'
-import {AiFillCamera} from 'react-icons/ai'
+import { useEffect } from 'react'
+import { AiFillCamera } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchUsers } from '../../redux/fetch/fetch_user/userActions'
+import { fetchUsers, uploadUserImg } from '../../redux/fetch/fetch_user/userActions'
+import { baseUrl, getUserId } from '../../redux/fetch/baseUrl'
+
 
 const Profile = () => {
 
-  const users= useSelector(state=> state.userReducer)
-  const dispatch= useDispatch()
+  const users = useSelector(state => state.userReducer)
+  
+  const dispatch = useDispatch()
   const userData = users.user
+  const userId = getUserId()
 
-  useEffect(()=>{
-        dispatch(fetchUsers());
-  },[]);
+
+
+  const handleUploadProfile = (e)=>{
+    if (e.target.files?.length > 0) {
+       const file= e.target.files[0]
+       console.log(file)
+       const fileTypes =["image/png", "image/jpeg","image/png, image/jpg"]
+       if(fileTypes.includes(file.type)){
+          const formData= new FormData()
+          formData.append("file",file)
+          uploadUserImg(userId,formData)
+
+        
+       }else{
+        console.log("not found img",file.type)
+       }
+    }
+  }
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
+
+
 
 
   return (
     <>
-     
-      <div className='grid md:grid-cols-2 overflow-x-hidden overflow-y-auto h-full'>
-       
+
+      <div className='grid lg:grid-cols-2 overflow-x-hidden overflow-y-auto h-full'>
+
         <div className='justify-self-center'>
-            <div className='w-[300px] h-[300px] rounded-full bg-blue-700  overflow-hidden flex justify-center items-center'>
-                <img className='w-full h-full ' draggable='false'  src={`${userData?.imgUrl || profileImg}`} alt="profile img" />
-             </div>
-             <label htmlFor='profile_Pic' className='text-3xl relative left-48 -top-10 w-14 h-14 flex justify-center items-center rounded-full bg-base-200 cursor-pointer'>
-                <AiFillCamera />
-                <input type="file" className='hidden' id="profile_Pic" />
-             </label>
+          <div className='w-[300px] h-[300px] rounded-full bg-blue-700  overflow-hidden flex justify-center items-center'>
+            <img className='w-full h-full ' draggable='false' src={`${baseUrl + '/img/' + userId}`} alt="profile img" />
+          </div>
+          
+            <label htmlFor='profile_Pic' className='text-3xl relative left-48 -top-10 w-14 h-14 flex justify-center items-center rounded-full bg-base-200 cursor-pointer'>
+              <AiFillCamera />
+              <input type="file" className='hidden' id="profile_Pic" onChange={handleUploadProfile} accept="image/png, image/jpeg" />
+            </label>
+          
         </div>
-        
+
 
         <div className='w-96'>
 
@@ -55,7 +81,7 @@ const Profile = () => {
 
       </div>
 
-       <div className=" flex flex-col  items-end px-64 py-8 "><Link to="/user/editProfile" className='btn'>Edit</Link></div>
+      <div className=" flex flex-col  items-end px-64 py-8 "><Link to="/user/editProfile" className='btn'>Edit</Link></div>
     </>
   )
 }

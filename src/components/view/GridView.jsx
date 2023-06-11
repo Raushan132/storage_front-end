@@ -1,16 +1,20 @@
-import React from 'react'
-import customFiles from '../../data/customFiles.json'
+import React, { useEffect } from 'react'
 import { AiFillFolder, AiFillFile, AiOutlineStar, AiFillStar, AiOutlineDownload, AiFillEdit } from 'react-icons/ai'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 
-const GridView = () => {
+const GridView = ({folders,files}) => {
 
-    const folders = [];
-    const files = [];
+    // const folders = [];
+    // const files = [];
 
-    customFiles.forEach(file => { file.isFolder ? folders.push(file) : files.push(file); })
+    // console.log(data)
+    // useEffect({})
+    // data.forEach(file => {
+    //     console.log(file.folder) 
+    //     file.folder ? folders.push(file) : files.push(file);
+    //  })
 
-    console.log(files)
+    console.log(folders,files)
 
     return (
         <div className=' overflow-x-hidden overflow-y-auto'>

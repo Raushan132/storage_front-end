@@ -1,5 +1,6 @@
 import {FETCH_FILE_REQUEST,FETCH_FILE_SUCCESS,FETCH_FILE_FAILURE} from './fileTypes'
-import { baseUrl, getCookie } from '../baseUrl'
+import { baseUrl, getCookie,getUserId } from '../baseUrl'
+import axios from 'axios'
 
 export const fetchFilesRequest = () => {
     return {
@@ -22,26 +23,40 @@ export const fetchFilesFailure = (error) => {
 }
 
 
-export const fetchFiles = (userId,path) => {
-    const data={
-        userId,
-        path
-    }
+export const fetchFiles = (path) => {
+   
     return (dispatch) => {
         dispatch(fetchFilesRequest)
-        axios.get(`${baseUrl}/user`,data,{
-            headers:{
-                'Authorization': getCookie("token"),
-
-            }
-        })
-            .then(res => {
-                const files = res.data
-                dispatch(fetchFilesSuccess(files))
-
-            }).catch(err => {
-                const errMsg = err.message
-                dispatch(fetchFilesFailure(errMsg))
-            })
-    }
+    axios.get(`${baseUrl}/allFilesOrFolder/${path}`, {
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie()
+      }}).then(res=>{
+        const files = res.data
+        dispatch(fetchFilesSuccess(files))
+      }).catch(err => {
+        const errMsg = err.message
+        dispatch(fetchFilesFailure(errMsg))
+    })
 }
+}
+
+
+export const fetchFilesWithStar = () => {
+   
+    return (dispatch) => {
+        dispatch(fetchFilesRequest)
+    axios.get(`${baseUrl}/allFilesOrFolderWithStar`, {
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie()
+      }}).then(res=>{
+        const files = res.data
+        dispatch(fetchFilesSuccess(files))
+      }).catch(err => {
+        const errMsg = err.message
+        dispatch(fetchFilesFailure(errMsg))
+    })
+}
+}
+

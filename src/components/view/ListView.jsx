@@ -1,14 +1,13 @@
 import React from 'react'
 import {AiTwotoneFolderOpen,AiFillFile,AiOutlineStar, AiFillStar,AiOutlineDownload, AiFillEdit} from 'react-icons/ai'
 import {BsThreeDotsVertical} from 'react-icons/bs'
-import data from '../../data/customFiles.json'
 import formatBytes from '../../data/ByteFormat';
 import DataTable, { createTheme } from 'react-data-table-component';
 import customStyles from '../../data/CustomTableStyle'
 
 
 
-const ListView = () => {
+const ListView = ({data}) => {
 
     
 
@@ -19,7 +18,7 @@ const ListView = () => {
             grow:2,
             selector: row => { return (<div className='flex justify-center items-center gap-2'>
                                           <div className='text-lg'>
-                                              {row.isFolder? <AiTwotoneFolderOpen /> :<AiFillFile/> }
+                                              {row.folder? <AiTwotoneFolderOpen /> :<AiFillFile/> }
                                           </div>
                                           <div>
                                              {row.fileName}
@@ -84,7 +83,7 @@ const ListView = () => {
     ];
     
 
-    console.log(data);
+    
   return (
     <>
     

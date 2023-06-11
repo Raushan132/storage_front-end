@@ -1,7 +1,21 @@
-import { Link } from "react-router-dom"
+import { useSignOut } from "react-auth-kit"
+import { Link, useNavigate } from "react-router-dom"
+import { baseUrl, getUserId } from "../../redux/fetch/baseUrl"
 
 
 const TopBar = () => {
+
+    const signOut = useSignOut()
+    const navigate = useNavigate()
+
+    const userId=getUserId()
+   
+    const handleLogout =()=>{
+       
+            signOut()
+            navigate("/auth")
+    }
+
     return (
         <>
           
@@ -19,7 +33,7 @@ const TopBar = () => {
                     <div className="dropdown dropdown-end pr-6">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img src="https://www.pngall.com/wp-content/uploads/5/Profile-Transparent.png" />
+                                <img draggable={false} src={`${ baseUrl+'/img/'+userId}`} />
                             </div>
                         </label>
                         <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-200 rounded-box w-52">
@@ -30,7 +44,7 @@ const TopBar = () => {
                                 </Link>
                             </li>
                             <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
+                            <li><div className="cursor-pointer" onClick={handleLogout}>Logout</div></li>
                         </ul>
                     </div>
                 </div>
