@@ -1,10 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Layout from '../../layout/layout'
 
 const EditProfile = () => {
     return (
         <>
-            <from>
+        <Layout>
+       
+        <div className='mt-8'>
+            <form>
                 <div className='flex flex-col gap-4 w-96 mx-16 my-16'>
 
                     <div className='flex gap-4 justify-between'>
@@ -44,7 +48,10 @@ const EditProfile = () => {
                     <Link to="/user/profile" className='btn'>Cancel</Link>
                     <span className='btn btn-primary'>Save</span>
                 </div>
-            </from>
+            </form>
+
+            </div>
+            </Layout>
         </>
     )
 }

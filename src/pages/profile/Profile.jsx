@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers, uploadUserImg } from '../../redux/fetch/fetch_user/userActions'
 import { baseUrl, getUserId } from '../../redux/fetch/baseUrl'
+import Layout from '../../layout/layout'
 
 
 const Profile = () => {
@@ -42,7 +43,9 @@ const Profile = () => {
 
   return (
     <>
-
+      <Layout>
+       
+        <div className='mt-8'>
       <div className='grid lg:grid-cols-2 overflow-x-hidden overflow-y-auto h-full'>
 
         <div className='justify-self-center'>
@@ -82,6 +85,8 @@ const Profile = () => {
       </div>
 
       <div className=" flex flex-col  items-end px-64 py-8 "><Link to="/user/editProfile" className='btn'>Edit</Link></div>
+      </div>
+      </Layout>
     </>
   )
 }

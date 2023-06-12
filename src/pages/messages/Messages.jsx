@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Inbox from './Inbox';
 import { getInboxMessage, getSentMessage } from '../../redux/fetch/messages/messageAction';
 import { getUserId } from '../../redux/fetch/baseUrl';
+import Layout from '../../layout/layout';
 // import  messageData  from '../../data/messageData';
 
 const Messages = () => {
@@ -34,6 +35,9 @@ const Messages = () => {
 
   return (
     <>
+    <Layout>
+       
+        <div className='mt-8'>
       <div>
         {/* activities like compose btn inbox btn and sent btn */}
         <div className='flex gap-5'>
@@ -70,8 +74,8 @@ const Messages = () => {
 
 
 
-
-
+      </div>
+      </Layout>
 
     </>
 

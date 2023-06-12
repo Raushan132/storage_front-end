@@ -2,7 +2,7 @@ import axios from "axios"
 import { baseUrl, getCookie } from "../redux/fetch/baseUrl"
 
 
-export const postCreateFolder = (userId,folderName,parentFolderId)=>{
+export const postCreateFolder = async (userId,folderName,parentFolderId)=>{
 
     const data ={
         userId,
@@ -10,7 +10,7 @@ export const postCreateFolder = (userId,folderName,parentFolderId)=>{
         parentFolderId
     }
     
-    return axios.post(`${baseUrl}/addFolder`,data,{
+    return await axios.post(`${baseUrl}/createFolder`,data,{
         headers: {
         'Content-Type': 'application/json',
         'Authorization': getCookie()
@@ -23,5 +23,19 @@ export const postCreateFolder = (userId,folderName,parentFolderId)=>{
       })
 
       
+
+}
+
+
+export const uploadFiles = async(formData)=>{
+
+  await axios.post(`${baseUrl}/addFiles`,formData,{
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie()
+      }
+  }).then(res=>{
+    console.log(res.data)
+  })
 
 }

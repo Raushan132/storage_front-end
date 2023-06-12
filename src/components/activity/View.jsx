@@ -29,7 +29,7 @@ const View = () => {
 
   return (
     <>
-      <div className='flex justify-between items-center pr-8'>
+      <div className='flex justify-between  items-center pr-8'>
         <Breadcrumbs path={breadcrumbs} />
         <div className='flex justify-center items-center gap-2'>
           <div className="tooltip tooltip-bottom" data-tip={currentView === GRIDVIEW ? 'List' :'Grid'}>

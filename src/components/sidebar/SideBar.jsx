@@ -9,6 +9,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createFolderVisible } from '../../redux/create_Folder/createFolderAction'
+import { baseUrl, getCookie, getUserId } from '../../redux/fetch/baseUrl'
 
 
 const SideBar = () => {
@@ -33,7 +34,6 @@ const SideBar = () => {
         let percent = Math.floor((loaded * 100) / total);
         console.log("here", loaded, total);
         if (percent < 100) {
-            console.log(`${loaded} bytes of ${total} bytes. ${percent}%`);
             setProgress(percent)
         } else {
             setProgress(0);
@@ -46,25 +46,28 @@ const SideBar = () => {
         
     }
 
+    const userId = getUserId()
+
     const fileUploadHandle = async (event) => {
 
         if (event.target.files?.length > 0) {
             const files = event.target.files
-            const userId = "5fa14b19-fc64-4b69-9fab-6aee7f76d7f7"
+            
             const formData = new FormData();
             formData.append("userId", userId)
             formData.append("parentFolderId", userId);
-
-            for (const key of Object.keys(files))
+            console.log(files)
+            for (const key of Object.keys(files)){
                 formData.set("files", files[key]);
 
                 const cancelRequest= axios.CancelToken.source();
                  setCancelRequests(cancelRequest);
 
-                 axios.post(`http://localhost:8081/addFiles`,
+                 axios.post(`${baseUrl}/addFiles`,
                     formData, {
                      headers: {
                        "Content-Type": "multipart/form-data",
+                       'Authorization': getCookie()
                      },
                      onUploadProgress,
                     cancelToken: cancelRequest.token
@@ -73,11 +76,51 @@ const SideBar = () => {
                 console.log(res.data)
                  })
 
-            axios.all()
+           
+            }
           
         }
 
     }
+
+    const folderUploadHandle = (e)=>{
+        if(e.target.files.length==0) return;
+        const files= e.target.files
+        const folderName=e.target.files[0].webkitRelativePath.split('/')[0]
+
+        const formData = new FormData()
+        console.log(userId)
+        formData.append('userId',userId)
+        formData.append('folderName',folderName)
+        formData.append('parentFolderId',userId)
+        
+        for (const key of Object.keys(files)){
+            formData.set("files", files[key]);
+
+            const cancelRequest= axios.CancelToken.source();
+             setCancelRequests(cancelRequest);
+
+             axios.post(`${baseUrl}/addFolder`,
+                formData, {
+                 headers: {
+                   "Content-Type": "multipart/form-data",
+                   'Authorization': getCookie()
+                 },
+                 onUploadProgress,
+                cancelToken: cancelRequest.token
+                }
+             ).then(res => {
+            console.log(res.data)
+             })
+
+       
+        }
+
+
+
+
+    }
+
 
 
     return (
@@ -101,7 +144,7 @@ const SideBar = () => {
                             <li><div>
                                 <RiFolderUploadFill />
                                 <label htmlFor='folderUpload'>Upload Folder</label>
-                                <input type="file" webkitdirectory="true" onChange={fileUploadHandle} id="folderUpload" hidden />
+                                <input type="file" webkitdirectory="true" onChange={folderUploadHandle} id="folderUpload" hidden />
                             </div></li>
                         </ul>
                     </div>

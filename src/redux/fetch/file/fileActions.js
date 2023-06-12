@@ -24,7 +24,7 @@ export const fetchFilesFailure = (error) => {
 
 
 export const fetchFiles = (path) => {
-   
+    
     return (dispatch) => {
         dispatch(fetchFilesRequest)
     axios.get(`${baseUrl}/allFilesOrFolder/${path}`, {
@@ -43,7 +43,7 @@ export const fetchFiles = (path) => {
 
 
 export const fetchFilesWithStar = () => {
-   
+ 
     return (dispatch) => {
         dispatch(fetchFilesRequest)
     axios.get(`${baseUrl}/allFilesOrFolderWithStar`, {
