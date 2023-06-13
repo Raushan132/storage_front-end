@@ -27,15 +27,41 @@ export const postCreateFolder = async (userId,folderName,parentFolderId)=>{
 }
 
 
-export const uploadFiles = async(formData)=>{
+export const uploadFiles = (sendingFiles,userId,parentFolderId)=>{
+   const formData = new FormData();
+   formData.append("userId",userId)
+   formData.append("parentFolderId",parentFolderId)
+   
+   sendingFiles.map(({allFiles,folderName}) => {
+     console.log(allFiles)
+     
+     formData.set("files",allFiles)
+        
+        if(folderName===''){
+          formData.delete('folderName')
+          axios.post(`${baseUrl}/addFiles`,formData,{
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': getCookie()
+              }
+          }).then(res=>{
+            console.log(res.data)
+          })
 
-  await axios.post(`${baseUrl}/addFiles`,formData,{
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': getCookie()
-      }
-  }).then(res=>{
-    console.log(res.data)
-  })
+        }else{
+          formData.set('folderName',folderName)
+          axios.post(`${baseUrl}/addFolder`,formData,{
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': getCookie()
+              }
+          }).then(res=>{
+            console.log(res.data)
+          })
+
+        }
+
+  });
+  
 
 }

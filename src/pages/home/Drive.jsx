@@ -10,6 +10,7 @@ import { fetchFiles } from "../../redux/fetch/file/fileActions"
 import { getUserId } from "../../redux/fetch/baseUrl"
 import Layout from "../../layout/layout"
 import View from "../../components/activity/View"
+import { uploadFiles } from "../../util/Util"
 
 
 
@@ -32,33 +33,45 @@ const Drive = () => {
   const currentView = useSelector(state => state?.viewLayout)
   const isViewDetailsVisible = useSelector(state => state?.isDetailsVisible) === VIEW_DETAIL_OPEN
 
-  const handleDrag = (e)=>{
 
-  }
 
+  
   
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
     if (!e.dataTransfer) return;
     const items=e.dataTransfer.items
-    // console.log(items)
+    const sendingFiles=[]
+    const allFiles=[]
     for(let key=0; key<items.length ;key++){
-          
-          console.log(typeof(key))
+        
           if(items[key].webkitGetAsEntry().isDirectory){
-            console.log(items[key].webkitGetAsEntry().createReader())
-                console.log("directory")
+             const reader= items[key].webkitGetAsEntry().createReader()
+              const tempFiles=[]
+              const folderName=items[key].webkitGetAsEntry().name
+                reader.readEntries((entrie)=>{
+                  entrie.map(files=>{
+                         files.isFile && files.file(f=> f.name!='desktop.ini' && tempFiles.push(f))
+                  })
+                })
+                sendingFiles.push({
+                  folderName,
+                  allFiles:tempFiles
+                })
           }else if(items[key].webkitGetAsEntry().isFile){
-            console.log("file")
+            
+            const reader= items[key].webkitGetAsEntry().file(f=>allFiles.push(f))
+            
+            
           }
-
-
+         
     }
-    // console.log(items[0].webkitGetAsEntry().isDirectory)
-    let files = Array.from(e.dataTransfer.files)
-    if (files.length < 1) return;
-    console.log(files)
+    sendingFiles.push({folderName:'',allFiles})
+    setTimeout(()=>{ uploadFiles(sendingFiles,userId,userId)},500)
+   
+    
+  
   }
 
   return (

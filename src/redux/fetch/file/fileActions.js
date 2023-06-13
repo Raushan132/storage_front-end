@@ -60,3 +60,20 @@ export const fetchFilesWithStar = () => {
 }
 }
 
+export const fetchTrashFile = () => {
+ 
+    return (dispatch) => {
+        dispatch(fetchFilesRequest)
+    axios.get(`${baseUrl}/trash`, {
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie()
+      }}).then(res=>{
+        const files = res.data
+        dispatch(fetchFilesSuccess(files))
+      }).catch(err => {
+        const errMsg = err.message
+        dispatch(fetchFilesFailure(errMsg))
+    })
+}
+}
