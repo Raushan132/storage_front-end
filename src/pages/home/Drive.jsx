@@ -78,7 +78,7 @@ const Drive = () => {
 
     <>
       <Layout>
-        <View />
+        <View pathname='' />
         <div className='mt-8'>
 
           <div className="w-full h-full flex gap-2 ">

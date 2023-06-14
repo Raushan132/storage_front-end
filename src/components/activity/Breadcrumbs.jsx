@@ -1,14 +1,16 @@
+import { Link } from "react-router-dom";
 
 
 const Breadcrumbs = ({path}) => {
+    console.log(path)
     return (
         <>
             <div className="max-w-xl text-xl breadcrumbs">
                 <ul>
                     {
-                        path.map(data=>{
+                        path.map(({pathname,link})=>{
                             return (
-                                <li key={data}><a>{data}</a></li>
+                                <li key={pathname}><Link to={link}>{pathname}</Link></li>
                             );
                         })
                     }

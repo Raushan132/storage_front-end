@@ -27,6 +27,7 @@ export const postCreateFolder = async (userId,folderName,parentFolderId)=>{
 }
 
 
+
 export const uploadFiles = (sendingFiles,userId,parentFolderId)=>{
    const formData = new FormData();
    formData.append("userId",userId)
@@ -65,3 +66,5 @@ export const uploadFiles = (sendingFiles,userId,parentFolderId)=>{
   
 
 }
+
+

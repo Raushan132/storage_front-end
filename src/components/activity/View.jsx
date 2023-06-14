@@ -7,26 +7,48 @@ import { GRIDVIEW,LISTVIEW } from '../../redux/view_layout/viewTypes'
 import { gridView, listView } from '../../redux/view_layout/view_actions'
 import { viewDetailClose, viewDetailOpen } from '../../redux/view_details/detailsActions'
 import { VIEW_DETAIL_OPEN } from '../../redux/view_details/detailsType'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 
-const View = () => {
-  const breadcrumbs = ['Home', 'Document', 'Test']
+const View = ({pathname}) => {
+  const breadcrumbs = []
+
+  breadcrumbs.push({pathname:'Drive',link:'/user/drive'})
+  if(pathname!==''){
+      const paths=  pathname.path.split('/').slice(1)
+      
+      console.log(paths)
+      if(paths.length>1){
+            paths.slice(1).forEach(path=>{
+               const val= path.split(";")
+               console.log("here",val)
+               breadcrumbs.push({pathname:val[0],link:`/user/drive/${val[1]}`})
+            })
+      }
+
+      breadcrumbs.push({pathname:pathname.fileName,link:''})
+
+  }
   
-
- const currentView = useSelector((state=> state?.viewLayout))
- const isDetailsVisible = useSelector((state=> state?.isDetailsVisible))
- const dispatch = useDispatch();
- 
+  
+  
+  
+  
+  const currentView = useSelector((state=> state?.viewLayout))
+  const isDetailsVisible = useSelector((state=> state?.isDetailsVisible))
+  const dispatch = useDispatch();
+  
   const handleView = () => {
     currentView === GRIDVIEW?  dispatch(listView(LISTVIEW)):dispatch(gridView(GRIDVIEW));
-   
+    
   }
-
+  
   const handleViewDatails = () =>{
     isDetailsVisible === VIEW_DETAIL_OPEN ? dispatch(viewDetailClose()) : dispatch(viewDetailOpen())
     console.log("view.jsx view detail handle function:", isDetailsVisible)
   }
-
+  
   return (
     <>
       <div className='flex justify-between  items-center pr-8'>

@@ -4,6 +4,7 @@ import isCreateFolderVisible from "./create_Folder/createFolderReducer"
 import isDetailsVisible from "./view_details/detailsReducer";
 import userReducer from "./fetch/fetch_user/userReducer";
 import fileReducer from "./fetch/file/fileReducer";
+import singleFileReducer from "./fetch/file/singleFileReducer";
 
 const rootReducer = combineReducers({
     viewLayout:viewLayoutReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
      isDetailsVisible,
      userReducer,
      fileReducer,
+     singleFileReducer
      
     })
 

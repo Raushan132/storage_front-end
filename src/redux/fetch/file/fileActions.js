@@ -1,7 +1,16 @@
-import {FETCH_FILE_REQUEST,FETCH_FILE_SUCCESS,FETCH_FILE_FAILURE} from './fileTypes'
+import {
+    FETCH_FILE_REQUEST,
+    FETCH_FILE_SUCCESS,
+    FETCH_FILE_FAILURE,
+    FETCH_SINGLE_FILE_FAILURE,  
+    FETCH_SINGLE_FILE_REQUEST,
+    FETCH_SINGLE_FILE_SUCCESS
+} from './fileTypes'
 import { baseUrl, getCookie,getUserId } from '../baseUrl'
 import axios from 'axios'
 
+
+// all file and folder detail get 
 export const fetchFilesRequest = () => {
     return {
         type: FETCH_FILE_REQUEST
@@ -22,6 +31,26 @@ export const fetchFilesFailure = (error) => {
     }
 }
 
+// Single file and folder detail get 
+export const fetchSingleFilesRequest = () => {
+    return {
+        type: FETCH_SINGLE_FILE_REQUEST
+    }
+}
+
+export const fetchSingleFilesSuccess = (file) => {
+    return {
+        type: FETCH_SINGLE_FILE_SUCCESS,
+        payload: file
+    }
+}
+
+export const fetchSingleFilesFailure = (error) => {
+    return {
+        type: FETCH_SINGLE_FILE_FAILURE,
+        payload: error
+    }
+}
 
 export const fetchFiles = (path) => {
     
@@ -76,4 +105,39 @@ export const fetchTrashFile = () => {
         dispatch(fetchFilesFailure(errMsg))
     })
 }
+}
+
+export const fetchFileOrFolderDetail = (fileId) => {
+ 
+    return (dispatch) => {
+        dispatch(fetchSingleFilesRequest)
+    axios.get(`${baseUrl}/fileDetails/${fileId}`, {
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie()
+      }}).then(res=>{
+        const file = res.data
+        dispatch(fetchSingleFilesSuccess(file))
+      }).catch(err => {
+        const errMsg = err.message
+        dispatch(fetchSingleFilesFailure(errMsg))
+    })
+}
+}
+
+export const getFolderDetails = async(folderId)=>{
+
+    try{
+       const response = await axios.get( `${baseUrl}/fileDetails/${folderId}`,{
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': getCookie()
+        }
+       })
+       
+       return response
+    }catch(err){
+         return err
+    }
+
 }

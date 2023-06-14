@@ -1,6 +1,6 @@
 
 import Drive from './pages/home/Drive'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import Trash from './pages/trash/Trash'
 import Starred from './pages/starred/Starred'
 import Shared from './pages/share/Shared'
@@ -9,6 +9,7 @@ import Profile from './pages/profile/Profile'
 import EditProfile from './pages/profile/EditProfile'
 import Auth from './pages/authentication/Auth'
 import { RequireAuth } from 'react-auth-kit'
+import DriveFolder from './pages/home/DriveFolder'
 
 
 
@@ -24,10 +25,14 @@ function App() {
     <>
      
           <Routes>
-            <Route path="/user" >
+            <Route path="/"  element={<Navigate  to="/auth"/>} />
+            
 
               <Route index path='/user/drive' element={
                 <RequireAuth loginPath={'/auth'}> <Drive /></RequireAuth>
+              } />
+               <Route index path='/user/drive/:id' element={
+                <RequireAuth loginPath={'/auth'}> <DriveFolder /></RequireAuth>
               } />
 
               <Route path='/user/starred' element={
@@ -51,8 +56,7 @@ function App() {
               <Route path='/user/editProfile' element={
               <RequireAuth loginPath={'/auth'}> <EditProfile /></RequireAuth>
               } />
-            </Route>
-
+            
             <Route path="/auth" element={<Auth />} />
 
           </Routes>
