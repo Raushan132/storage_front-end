@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import { fetchFileOrFolderDetail } from '../../redux/fetch/file/fileActions'
 import { getStarred,renameFileAndFolder,getDownloaded,deleteFileAndFolder } from '../../util/dropMenuFunctions'
 import { viewDetailOpen } from '../../redux/view_details/detailsActions'
+import { renameVisible } from '../../redux/rename_folder/renameAction'
+import { getDownloadFile } from '../../util/Util'
 
 const GridView = ({ folders, files }) => {
 
@@ -63,7 +65,7 @@ const GridView = ({ folders, files }) => {
                 <div className='flex flex-wrap  gap-6'>
                     {folders.map(folder => {
                         return (
-                            <div className='text-lg flex items-center  w-48 rounded-lg px-4 py-2 justify-between bg-base-300 cursor-default'
+                            <div className='text-lg flex items-center select-none  w-48 rounded-lg px-4 py-2 justify-between bg-base-300 cursor-default'
                              onDoubleClick={()=>handleOpenFolder(folder.fileId)} key={folder.fileId}
                              onClick={()=>{handleViewData(folder.fileId)}}
                              >
@@ -73,13 +75,13 @@ const GridView = ({ folders, files }) => {
                                         {folder?.fileName.substring(0, 15)}
                                     </div>
                                 </div>
-                                <div className={`dropdown ${position>55?'dropdown-top':'dropdown-bottom'}   w-full flex justify-end `} >
-                                    <label tabIndex={0} onClick={handlePosition}  className="cursor-pointer" ><BsThreeDotsVertical /></label>
-                                    <ul tabIndex={0}  className="dropdown-content menu px-2 shadow bg-base-200 rounded-box w-52 translate-x-20 ">
+                                <div className={`dropdown ${position>52?'dropdown-top':'dropdown-bottom'}   w-full flex justify-end `} >
+                                    <label tabIndex={0} onClick={handlePosition}  className=" cursor-pointer" ><BsThreeDotsVertical /></label>
+                                    <ul tabIndex={0}  className="dropdown-content menu px-2  shadow bg-base-200 rounded-box w-52 translate-x-20 ">
                                        
                                         <li><a>Share</a></li>
                                         <li><div onClick={()=>{getStarred(folder.fileId)}}>{folder.hasStar?'Remove to star':'Add to star'}</div></li>
-                                        <li><a>Rename</a></li>
+                                        <li><div onClick={()=>{console.log("here3000");dispatch(renameVisible(true))}}>Rename</div></li>
                                         <hr />
                                         <li><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
                                         <li><a>Download</a></li>
@@ -97,7 +99,7 @@ const GridView = ({ folders, files }) => {
                 <div className='flex flex-wrap  gap-6'>
                     {files.map(file => {
                         return (
-                            <div className='text-md flex items-center w-48 rounded-lg px-4 py-2 justify-between bg-base-300 cursor-default '
+                            <div className='text-md flex items-center select-none w-48 rounded-lg px-4 py-2 justify-between bg-base-300 cursor-default '
                              key={file?.fileId}
                              onClick={()=>{handleViewData(file.fileId)}}
                              >
@@ -107,16 +109,16 @@ const GridView = ({ folders, files }) => {
                                         {file?.fileName.substring(0, 15)}
                                     </div>
                                 </div>
-                                <div className={`dropdown ${position>52?'dropdown-top':'dropdown-bottom'}   w-full flex justify-end `} onClick={handlePosition}>
-                                    <label tabIndex={0}  className="cursor-pointer" ><BsThreeDotsVertical /></label>
-                                    <ul tabIndex={0}  className="dropdown-content menu px-2 shadow bg-base-200 rounded-box w-52 translate-x-20 ">
+                                <div className={`dropdown ${position>52?'dropdown-top':'dropdown-bottom'}   w-full flex justify-end `} >
+                                    <label tabIndex={0} onClick={handlePosition}  className=" cursor-pointer" ><BsThreeDotsVertical /></label>
+                                    <ul tabIndex={0}  className="dropdown-content menu px-2  shadow bg-base-200 rounded-box w-52 translate-x-20 ">
                                        
                                         <li><a>Share</a></li>
-                                        <li><a>Remove Star</a></li>
-                                        <li><a>Rename</a></li>
+                                        <li><div onClick={()=>{getStarred(file.fileId)}}>{file.hasStar?'Remove to star':'Add to star'}</div></li>
+                                        <li><div onClick={()=>{dispatch(renameVisible(true))}}>Rename</div></li>
                                         <hr />
-                                        <li><a>View details</a></li>
-                                        <li><a>Download</a></li>
+                                        <li><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
+                                        <li><div onClick={()=>{getDownloadFile(file.fileId)}}>Download</div></li>
                                         <hr />
                                         <li><a>Remove</a></li>
                                     </ul>

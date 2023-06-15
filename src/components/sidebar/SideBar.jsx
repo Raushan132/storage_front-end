@@ -10,12 +10,15 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createFolderVisible } from '../../redux/create_Folder/createFolderAction'
 import { baseUrl, getCookie, getUserId } from '../../redux/fetch/baseUrl'
+import RenameFile from '../activity/RenameFile'
 
 
 const SideBar = () => {
 
     
     const iscreateFolderVisible= useSelector(state=> state?.isCreateFolderVisible);
+    const {visible}= useSelector(state=> state?.renameVisibleReduce);
+    const isrenameFileVisible=visible
     const dispatch = useDispatch()
     const handleCreateFolder = ()=>{
          if(!iscreateFolderVisible)
@@ -126,6 +129,7 @@ const SideBar = () => {
     return (
         <>
             {iscreateFolderVisible && <CreateFolder />}
+            {isrenameFileVisible && <RenameFile/>}
             <div className=' shadow-xl bg-base-200 h-screen fixed z-20'>
                 <div className=' px-8 my-16  w-full'>
 

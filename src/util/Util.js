@@ -26,6 +26,37 @@ export const postCreateFolder = async (userId,folderName,parentFolderId)=>{
 
 }
 
+export const getRenameFolder = (formData)=>{
+      
+  axios.patch(`${baseUrl}/renameFile`,formData,{
+    headers:{
+      'Content-Type': 'form-data',
+        'Authorization': getCookie()
+    }
+  }).then(res=>{
+    console.log(res.data)
+  })
+    
+
+}
+
+export const getDownloadFile = (fileId)=>{
+   return axios.get(`${baseUrl}/download/${fileId}`,{
+      headers:{
+        'Content-Type': 'form-data',
+          'Authorization': getCookie()
+      },
+      responseType: 'blob'
+    }).then(res=>{
+     
+      const blob = new Blob([res.data], { type: res.headers.getContentType() });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = res.headers.filename;
+      link.click();
+    })
+}
+
 
 
 export const uploadFiles = (sendingFiles,userId,parentFolderId)=>{
