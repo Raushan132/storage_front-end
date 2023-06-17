@@ -17,6 +17,7 @@ import { uploadFiles } from "../../util/Util"
 
 const Drive = () => {
 
+  const {render} = useSelector(state=> state.isRender)
   const { loading, file, error } = useSelector(state => state.fileReducer)
   const allFiles = file.filter(file => !file.folder)
   const allFolders = file.filter(file => file.folder)
@@ -26,7 +27,7 @@ const Drive = () => {
 
   useEffect(() => {
     dispatch(fetchFiles(userId));
-  }, []);
+  }, [render]);
 
 
 

@@ -15,6 +15,7 @@ import { useLocation, useMatch, useNavigate } from "react-router-dom"
 
 
 const DriveFolder = () => {
+    const {render} = useSelector(state=>state.isRender)
     const { loading, file, error } = useSelector(state => state.fileReducer)
     // console.log("error",error)
     const [breadcrumbsPath,setBreadcrumbsPath]= useState('')
@@ -35,7 +36,7 @@ const DriveFolder = () => {
             setBreadcrumbsPath(res.data)
        })
       
-    }, [urlPath.pathname]);
+    }, [urlPath.pathname,render]);
   
   
   

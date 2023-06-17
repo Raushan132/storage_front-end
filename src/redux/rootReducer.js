@@ -6,6 +6,7 @@ import userReducer from "./fetch/fetch_user/userReducer";
 import fileReducer from "./fetch/file/fileReducer";
 import singleFileReducer from "./fetch/file/singleFileReducer";
 import renameVisibleReduce from "./rename_folder/renameReducer";
+import isRender from "./render/renderReducer";
 
 const rootReducer = combineReducers({
     viewLayout:viewLayoutReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
      userReducer,
      fileReducer,
      singleFileReducer,
-     renameVisibleReduce
+     renameVisibleReduce,
+     isRender
      
     })
 

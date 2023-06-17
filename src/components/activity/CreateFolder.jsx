@@ -4,11 +4,13 @@ import { postCreateFolder } from "../../util/Util";
 import { useRef } from "react";
 import { getUserId } from "../../redux/fetch/baseUrl";
 import { useLocation } from "react-router-dom";
+import { reRender } from "../../redux/render/renderAction";
 
 
 
 const CreateFolder = () => {
 
+    const {render} = useSelector(state=> state.isRender)
     const isVisible= useSelector(state=> state?.isCreateFolderVisible)
     const {pathname} = useLocation();
     console.log()
@@ -25,9 +27,12 @@ const CreateFolder = () => {
           if(pathname.match('/user/drive')!==null  && pathname.match('/user/drive')?.input.split("/").length===4){
             
             const parentFolderId= pathname.match('/user/drive')?.input.split("/")[3]
-            return postCreateFolder(userId,newFolderName,parentFolderId).then(res=> handleCancelBtn());
+            return postCreateFolder(userId,newFolderName,parentFolderId).then(res=> {
+              handleCancelBtn();
+              dispatch(reRender(render))
+            });
           }
-          postCreateFolder(userId,newFolderName,userId).then(res=> handleCancelBtn())
+          postCreateFolder(userId,newFolderName,userId).then(res=>{ handleCancelBtn(); dispatch(reRender(render))})
       }       
 
     }

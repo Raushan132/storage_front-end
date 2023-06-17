@@ -25,10 +25,10 @@ const Inbox = ({data}) => {
     ]
 
 
-    
+    console.log(data)
 
   return (
-    <div className='bg-base-200 max-h-[450px] overflow-y-auto my-8'>Inbox
+    <div className='bg-base-200 lg:w-[90%] max-h-[450px] overflow-y-auto my-8'>Inbox
     
       <DataTable 
        columns={columns}
@@ -38,6 +38,27 @@ const Inbox = ({data}) => {
         customStyles={customStyles}
         highlightOnHover
       />
+
+
+      <table className='w-full'>
+        
+        <tbody>
+          {
+            data.map(message=>{return(
+
+              <tr className='text-sm lg:text-lg h-12 hover:bg-base-300 hover:text-white transition-all cursor-pointer' key={message.messageId}>
+             <td className='px-2 w-36 lg:w-44'>{message.senderName}</td>
+             <td className='px-2'>{message.subject}</td>
+             <td className='px-2'>{message.description}</td>
+             <td className='px-2 text-md'>6:45</td>
+           </tr>
+               );})
+
+          }
+       
+        </tbody>
+       
+      </table>
 
     </div>
   )

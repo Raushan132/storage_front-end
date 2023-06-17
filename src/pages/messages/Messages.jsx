@@ -5,11 +5,14 @@ import Inbox from './Inbox';
 import { getInboxMessage, getSentMessage } from '../../redux/fetch/messages/messageAction';
 import { getUserId } from '../../redux/fetch/baseUrl';
 import Layout from '../../layout/layout';
+import { useSelector } from 'react-redux';
 // import  messageData  from '../../data/messageData';
 
 const Messages = () => {
 
+  const {render} = useSelector(state=> state.isRender)
   const[composeVisible,setComposeVisible]=useState(false);
+  
 
   const[messageSendRecive,setMessageSendRecive]= useState('INBOX')
 
@@ -27,7 +30,7 @@ const Messages = () => {
 
    
 
-  },[messageSendRecive])
+  },[messageSendRecive,render])
 
   const handleComposeVisible =()=>{
       setComposeVisible(false)

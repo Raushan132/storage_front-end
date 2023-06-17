@@ -3,27 +3,31 @@ import { AiFillFolder, AiFillFile, AiFillFolderOpen, AiOutlineStar, AiFillStar, 
 
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { deleteFileAndFolderFovever, restoreFileOrFolder } from '../../util/Util'
+import { useDispatch, useSelector } from 'react-redux'
+import { reRender } from '../../redux/render/renderAction'
 
 
 
 const TrashGridView = ({ trashFiles }) => {
     
-    
+    const {render} = useSelector(state=>state.isRender)
 
     const [position,setPosition] = useState(0)
    
-    // const dispatch = useDispatch()
+    const dispatch = useDispatch()
     
 
    const handleRestore =(trashId)=>{
         
         restoreFileOrFolder(trashId)
+        dispatch(reRender(render))
 
 
    }
 
    const handleDeleteFoever = (trashId)=>{
         deleteFileAndFolderFovever(trashId)
+        dispatch(reRender(render))
    }
 
    

@@ -2,9 +2,13 @@ import {AiOutlineClose} from 'react-icons/ai'
 import { motion } from "framer-motion"
 import { useRef } from 'react'
 import { sendMessage } from '../../redux/fetch/messages/messageAction'
+import { useDispatch, useSelector } from 'react-redux'
+import { reRender } from '../../redux/render/renderAction'
 
 const Compose = ({composeVisible}) => {
 
+    const {render} = useSelector(state=> state.isRender)
+    const dispatch = useDispatch()
     const to = useRef('')
     const subject = useRef('')
     const description = useRef('')
@@ -17,6 +21,10 @@ const Compose = ({composeVisible}) => {
                  description: description.current?.value
             }
             sendMessage(msg);
+
+            dispatch(reRender(render))
+
+
     }
     
     return (

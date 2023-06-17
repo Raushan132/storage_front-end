@@ -11,10 +11,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createFolderVisible } from '../../redux/create_Folder/createFolderAction'
 import { baseUrl, getCookie, getUserId } from '../../redux/fetch/baseUrl'
 import RenameFile from '../activity/RenameFile'
+import { reRender } from '../../redux/render/renderAction'
 
 
 const SideBar = () => {
 
+    const {render} = useSelector(state=> state.isRender)
     const {pathname} = useLocation()
 
     const iscreateFolderVisible= useSelector(state=> state?.isCreateFolderVisible);
@@ -82,6 +84,7 @@ const SideBar = () => {
                     }
                  ).then(res => {
                 console.log(res.data)
+                   dispatch(reRender(render))
                  })
 
            
@@ -123,6 +126,7 @@ const SideBar = () => {
                 }
              ).then(res => {
             console.log(res.data)
+            dispatch(reRender(render))
              })
 
        

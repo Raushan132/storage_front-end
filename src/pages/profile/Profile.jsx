@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { AiFillCamera } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { fetchUsers, uploadUserImg } from '../../redux/fetch/fetch_user/userActions'
 import { baseUrl, getUserId } from '../../redux/fetch/baseUrl'
 import Layout from '../../layout/layout'
@@ -9,8 +9,9 @@ import Layout from '../../layout/layout'
 
 const Profile = () => {
 
+
   const users = useSelector(state => state.userReducer)
-  
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const userData = users.user
   const userId = getUserId()
@@ -26,6 +27,7 @@ const Profile = () => {
           const formData= new FormData()
           formData.append("file",file)
           uploadUserImg(userId,formData)
+          navigate(0)
 
         
        }else{

@@ -4,11 +4,13 @@ import { getRenameFolder, postCreateFolder } from "../../util/Util";
 import { useRef } from "react";
 import { getUserId } from "../../redux/fetch/baseUrl";
 import { renameVisible } from "../../redux/rename_folder/renameAction";
+import { reRender } from "../../redux/render/renderAction";
 
 
 
 const RenameFile = () => {
 
+    const {render} = useSelector(state=> state.isRender)
     const isVisible= useSelector(state=> state?.renameVisibleReduce)
     const {file} = useSelector(state=> state.singleFileReducer)
     const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const RenameFile = () => {
         formData.append('fileId',file.fileId)
         getRenameFolder(formData)
         dispatch(renameVisible(false))
+        dispatch(reRender(render))
         
       }
         

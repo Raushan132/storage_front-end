@@ -11,6 +11,7 @@ import TrashGridView from "../../components/view/TrashGridView"
 
 const Trash = () => {
  
+  const {render} = useSelector(state=>state.isRender)
     const currentView = useSelector(state=> state?.viewLayout)
     const {loading,file, error} = useSelector(state=> state?.fileReducer)
     
@@ -22,7 +23,7 @@ const Trash = () => {
 
       dispatch(fetchTrashFile())
 
-    },[]);
+    },[render]);
   console.log(file)
   return (
     <>

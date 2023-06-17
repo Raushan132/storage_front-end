@@ -1,0 +1,2 @@
+export const RENDER_TRUE ='RENDER_TRUE'
+export const RENDER_FALSE='RENDER_FALSE'

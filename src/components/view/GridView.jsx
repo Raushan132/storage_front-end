@@ -2,16 +2,18 @@ import React, { useEffect, useRef, useState } from 'react'
 import { AiFillFolder, AiFillFile, AiFillFolderOpen, AiOutlineStar, AiFillStar, AiOutlineDownload, AiFillEdit } from 'react-icons/ai'
 
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { fetchFileOrFolderDetail } from '../../redux/fetch/file/fileActions'
 import { getStarred} from '../../util/dropMenuFunctions'
 import { viewDetailOpen } from '../../redux/view_details/detailsActions'
 import { renameVisible } from '../../redux/rename_folder/renameAction'
 import { getDownloadFile,deleteFileAndFolder } from '../../util/Util'
+import { reRender } from '../../redux/render/renderAction'
 
 const GridView = ({ folders, files }) => {
 
+    const {render} = useSelector(state=> state.isRender)
     const [position,setPosition] = useState(0)
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -27,6 +29,7 @@ const GridView = ({ folders, files }) => {
    const handleRemove =(fileId)=>{
         
        deleteFileAndFolder(fileId)
+       dispatch(reRender(render))
    }
 
    const handleViewData = (fileId) =>{
