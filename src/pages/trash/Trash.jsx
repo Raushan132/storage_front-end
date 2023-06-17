@@ -7,11 +7,15 @@ import View from "../../components/activity/View"
 import { useEffect } from "react"
 import { getUserId } from "../../redux/fetch/baseUrl"
 import { fetchTrashFile } from "../../redux/fetch/file/fileActions"
+import TrashGridView from "../../components/view/TrashGridView"
 
 const Trash = () => {
  
     const currentView = useSelector(state=> state?.viewLayout)
     const {loading,file, error} = useSelector(state=> state?.fileReducer)
+    
+     console.log("here ther",file)
+
     const dispatch = useDispatch()
     const userId = getUserId()
     useEffect(()=>{
@@ -24,13 +28,13 @@ const Trash = () => {
     <>
      
      <Layout>
-        <View />
+        <View pathname={''} />
 
         <div className='mt-8'>
 
-    <div className="w-full h-full ">
+    <div  className="w-full min-h-[550px]  overflow-y-auto">
        
-     {/* {currentView=== LISTVIEW? <ListView />     :   <GridView />} */}
+     {currentView=== LISTVIEW? <ListView data={file} />     :   <TrashGridView trashFiles={file}/>}
       
     </div>
 

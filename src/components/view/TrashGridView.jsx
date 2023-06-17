@@ -2,35 +2,34 @@ import React, { useEffect, useRef, useState } from 'react'
 import { AiFillFolder, AiFillFile, AiFillFolderOpen, AiOutlineStar, AiFillStar, AiOutlineDownload, AiFillEdit } from 'react-icons/ai'
 
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { fetchFileOrFolderDetail } from '../../redux/fetch/file/fileActions'
-import { getStarred} from '../../util/dropMenuFunctions'
-import { viewDetailOpen } from '../../redux/view_details/detailsActions'
-import { renameVisible } from '../../redux/rename_folder/renameAction'
-import { getDownloadFile,deleteFileAndFolder } from '../../util/Util'
+import { deleteFileAndFolderFovever, restoreFileOrFolder } from '../../util/Util'
 
-const GridView = ({ folders, files }) => {
+
+
+const TrashGridView = ({ trashFiles }) => {
+    
+    
 
     const [position,setPosition] = useState(0)
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+   
+    // const dispatch = useDispatch()
     
 
-   const handleOpenFolder =(fileId)=>{
-    
-    navigate(`/user/drive/${fileId}`)
-
-
-   }
-
-   const handleRemove =(fileId)=>{
+   const handleRestore =(trashId)=>{
         
-       deleteFileAndFolder(fileId)
+        restoreFileOrFolder(trashId)
+
+
    }
+
+   const handleDeleteFoever = (trashId)=>{
+        deleteFileAndFolderFovever(trashId)
+   }
+
+   
 
    const handleViewData = (fileId) =>{
-        dispatch(fetchFileOrFolderDetail(fileId))
+        // dispatch(fetchFileOrFolderDetail(fileId))
    }
    
    
@@ -48,7 +47,7 @@ const GridView = ({ folders, files }) => {
 
     }
 
-    if (folders.length == 0 && files.length == 0) {
+    if (trashFiles.filter(trashFile=> trashFile?.file?.folder).length == 0 && trashFiles.filter(trashFile=> !trashFile?.file?.folder).length == 0) {
 
         return (
             <>
@@ -64,34 +63,30 @@ const GridView = ({ folders, files }) => {
     }
 
     return (
-        <div className=' overflow-x-hidden min-h-full overflow-y-auto'>
-           { folders.length>0 &&  <div>
+        <div className=' overflow-x-hidden h-[550px]  overflow-y-auto'>
+           { trashFiles.filter(trashFile=> trashFile.file?.folder).length>0 &&  <div>
                 <div className='text-2xl my-6'>Folders</div>
                 <div className='flex flex-wrap  gap-6'>
-                    {folders.map(folder => {
+                    {trashFiles.filter(trashFile=> trashFile.file.folder).map(({file,trashId}) => {
                         return (
                             <div className='text-lg flex items-center select-none  w-48 rounded-lg px-4 py-2 justify-between bg-base-300 cursor-default'
-                             onDoubleClick={()=>handleOpenFolder(folder.fileId)} key={folder.fileId}
-                             onClick={()=>{handleViewData(folder.fileId)}}
+                              key={trashId}
+                             onClick={()=>{handleViewData(file.fileId)}}
                              >
                                 <div className='flex justify-center gap-2 items-center'>
                                     <div className='text-xl'><AiFillFolder /></div>
                                     <div className='flex w-28'>
-                                        {folder?.fileName?.substring(0, 15)}
+                                        {file?.fileName.substring(0, 15)}
                                     </div>
                                 </div>
                                 <div className={`dropdown ${position>52?'dropdown-top':'dropdown-bottom'}   w-full flex justify-end `} >
                                     <label tabIndex={0} onClick={handlePosition}  className=" cursor-pointer" ><BsThreeDotsVertical /></label>
                                     <ul tabIndex={0}  className="dropdown-content menu px-2  shadow bg-base-200 rounded-box w-52 translate-x-20 ">
                                        
-                                        <li><a>Share</a></li>
-                                        <li><div onClick={()=>{getStarred(folder.fileId)}}>{folder.hasStar?'Remove to star':'Add to star'}</div></li>
-                                        <li><div onClick={()=>{console.log("here3000");dispatch(renameVisible(true))}}>Rename</div></li>
-                                        <hr />
-                                        <li><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
-                                        <li><a>Download</a></li>
-                                        <hr />
-                                        <li><div onClick={()=>{handleRemove(folder.fileId)}}>Remove</div></li>
+                                        <li><div onClick={()=>handleRestore(trashId)}>Restore</div></li>
+                                       
+                                        <li><div onClick={()=>handleDeleteFoever(trashId)}>Delete Forever</div></li>
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -99,10 +94,10 @@ const GridView = ({ folders, files }) => {
                     })}
                 </div>
             </div>}
-           { files.length>0 &&  <div>
+           { trashFiles.filter(trashFile=> !trashFile.file?.folder).length>0 &&  <div>
                 <div className='text-2xl my-6'>Files</div>
                 <div className='flex flex-wrap  gap-6'>
-                    {files.map(file => {
+                    {trashFiles.filter(trashFile=> !trashFile.file?.folder).map(({file,trashId})=> {
                         return (
                             <div className='text-md flex items-center select-none w-48 rounded-lg px-4 py-2 justify-between bg-base-300 cursor-default '
                              key={file?.fileId}
@@ -116,16 +111,13 @@ const GridView = ({ folders, files }) => {
                                 </div>
                                 <div className={`dropdown ${position>52?'dropdown-top':'dropdown-bottom'}   w-full flex justify-end `} >
                                     <label tabIndex={0} onClick={handlePosition}  className=" cursor-pointer" ><BsThreeDotsVertical /></label>
-                                    <ul tabIndex={0}  className="dropdown-content menu px-2  shadow bg-base-200 rounded-box w-52 translate-x-20 ">
+                                    <ul 
+                                      
+                                    tabIndex={0}  className="dropdown-content menu px-2   shadow bg-base-200 rounded-box w-52 translate-x-20 ">
                                        
-                                        <li><a>Share</a></li>
-                                        <li><div onClick={()=>{getStarred(file.fileId)}}>{file.hasStar?'Remove to star':'Add to star'}</div></li>
-                                        <li><div onClick={()=>{dispatch(renameVisible(true))}}>Rename</div></li>
-                                        <hr />
-                                        <li><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
-                                        <li><div onClick={()=>{getDownloadFile(file.fileId)}}>Download</div></li>
-                                        <hr />
-                                        <li><div onClick={()=>{handleRemove(file.fileId)}}>Remove</div></li>
+                                       <li><div onClick={()=>handleRestore(trashId)}>Restore</div></li>
+                                       <li><div onClick={()=>handleDeleteFoever(trashId)}>Delete Forever</div></li>
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -138,4 +130,4 @@ const GridView = ({ folders, files }) => {
     )
 }
 
-export default GridView
+export default TrashGridView

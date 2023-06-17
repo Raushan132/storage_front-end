@@ -40,21 +40,19 @@ export const getRenameFolder = (formData)=>{
 
 }
 
-export const getDownloadFile = (fileId)=>{
-   return axios.get(`${baseUrl}/download/${fileId}`,{
-      headers:{
-        'Content-Type': 'form-data',
-          'Authorization': getCookie()
-      },
-      responseType: 'blob'
-    }).then(res=>{
-     
-      const blob = new Blob([res.data], { type: res.headers.getContentType() });
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(blob);
-      link.download = res.headers.filename;
-      link.click();
-    })
+export const getDownloadFile = async (fileId)=>{
+   const res = await axios.get(`${baseUrl}/download/${fileId}`, {
+    headers: {
+      'Content-Type': 'form-data',
+      'Authorization': getCookie()
+    },
+    responseType: 'blob'
+  })
+  const blob = new Blob([res.data], { type: res.headers.getContentType() })
+  const link = document.createElement('a')
+  link.href = window.URL.createObjectURL(blob)
+  link.download = res.headers.filename
+  link.click()
 }
 
 
@@ -98,4 +96,50 @@ export const uploadFiles = (sendingFiles,userId,parentFolderId)=>{
 
 }
 
+export const deleteFileAndFolder = async (fileId)=>{
+    
+   const   res = await axios.delete(`${baseUrl}/deleteFileOrFolder/${fileId}`,{
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie()
+      }
+     })
+
+     console.log(res.data)
+     return res
+}
+
+export const restoreFileOrFolder = async(trashId) =>{
+    try{
+       const res=   await axios.post(`${baseUrl}/trash`,{trashId:trashId},{
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': getCookie()
+            }
+          })
+
+          console.log(res.data)
+    }catch(err){
+
+    }
+}
+
+export const deleteFileAndFolderFovever = async (trashId)=>{
+    
+  try{
+
+    const   res = await axios.delete(`${baseUrl}/trash/${trashId}`,{
+       headers: {
+         'Content-Type': 'application/json',
+         'Authorization': getCookie()
+       }
+      })
+  
+      console.log(res.data)
+  }catch(error){
+    
+  }
+
+  
+}
 

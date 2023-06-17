@@ -15,7 +15,8 @@ import { useLocation, useMatch, useNavigate } from "react-router-dom"
 
 
 const DriveFolder = () => {
-    const { loding, file, error } = useSelector(state => state.fileReducer)
+    const { loading, file, error } = useSelector(state => state.fileReducer)
+    // console.log("error",error)
     const [breadcrumbsPath,setBreadcrumbsPath]= useState('')
     const allFiles = file.filter(file => !file.folder)
     const allFolders = file.filter(file => file.folder)
@@ -76,7 +77,7 @@ const DriveFolder = () => {
            
       }
       sendingFiles.push({folderName:'',allFiles})
-      setTimeout(()=>{ uploadFiles(sendingFiles,userId,userId)},500)
+      setTimeout(()=>{ uploadFiles(sendingFiles,userId,userId)},1000)
      
       
     

@@ -3,12 +3,15 @@ import { createFolderNotVisible } from "../../redux/create_Folder/createFolderAc
 import { postCreateFolder } from "../../util/Util";
 import { useRef } from "react";
 import { getUserId } from "../../redux/fetch/baseUrl";
+import { useLocation } from "react-router-dom";
 
 
 
 const CreateFolder = () => {
 
     const isVisible= useSelector(state=> state?.isCreateFolderVisible)
+    const {pathname} = useLocation();
+    console.log()
     const dispatch = useDispatch();
     const handleCancelBtn = ()=>{
         dispatch(createFolderNotVisible());
@@ -18,9 +21,14 @@ const CreateFolder = () => {
     const userId = getUserId()
     const handleCreateBtn =()=>{
       const newFolderName = folderName.current.value;
-      if(newFolderName !== '')
-        postCreateFolder(userId,newFolderName,userId).then(res=> handleCancelBtn())
-             
+      if(newFolderName !== ''){
+          if(pathname.match('/user/drive')!==null  && pathname.match('/user/drive')?.input.split("/").length===4){
+            
+            const parentFolderId= pathname.match('/user/drive')?.input.split("/")[3]
+            return postCreateFolder(userId,newFolderName,parentFolderId).then(res=> handleCancelBtn());
+          }
+          postCreateFolder(userId,newFolderName,userId).then(res=> handleCancelBtn())
+      }       
 
     }
    

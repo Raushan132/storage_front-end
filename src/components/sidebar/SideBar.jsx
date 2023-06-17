@@ -6,7 +6,7 @@ import { RiFolderUploadFill } from 'react-icons/ri'
 import CreateFolder from '../activity/CreateFolder'
 import { useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createFolderVisible } from '../../redux/create_Folder/createFolderAction'
 import { baseUrl, getCookie, getUserId } from '../../redux/fetch/baseUrl'
@@ -15,7 +15,8 @@ import RenameFile from '../activity/RenameFile'
 
 const SideBar = () => {
 
-    
+    const {pathname} = useLocation()
+
     const iscreateFolderVisible= useSelector(state=> state?.isCreateFolderVisible);
     const {visible}= useSelector(state=> state?.renameVisibleReduce);
     const isrenameFileVisible=visible
@@ -58,7 +59,11 @@ const SideBar = () => {
             
             const formData = new FormData();
             formData.append("userId", userId)
-            formData.append("parentFolderId", userId);
+            if(pathname.match('/user/drive')!==null  && pathname.match('/user/drive')?.input.split("/").length===4){
+                const parentFolderId= pathname.match('/user/drive')?.input.split("/")[3]
+                formData.append("parentFolderId", parentFolderId);
+              }else
+                 formData.append("parentFolderId", userId);
             console.log(files)
             for (const key of Object.keys(files)){
                 formData.set("files", files[key]);
@@ -95,7 +100,11 @@ const SideBar = () => {
         console.log(userId)
         formData.append('userId',userId)
         formData.append('folderName',folderName)
-        formData.append('parentFolderId',userId)
+        if(pathname.match('/user/drive')!==null  && pathname.match('/user/drive')?.input.split("/").length===4){
+            const parentFolderId= pathname.match('/user/drive')?.input.split("/")[3]
+            formData.append("parentFolderId", parentFolderId);
+          }else
+             formData.append("parentFolderId", userId);
         
         for (const key of Object.keys(files)){
             formData.set("files", files[key]);

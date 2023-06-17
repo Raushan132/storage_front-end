@@ -53,7 +53,7 @@ export const fetchSingleFilesFailure = (error) => {
 }
 
 export const fetchFiles = (path) => {
-    
+    console.log(getCookie())
     return (dispatch) => {
         dispatch(fetchFilesRequest)
     axios.get(`${baseUrl}/allFilesOrFolder/${path}`, {
@@ -66,6 +66,7 @@ export const fetchFiles = (path) => {
       }).catch(err => {
         const errMsg = err.message
         dispatch(fetchFilesFailure(errMsg))
+        
     })
 }
 }

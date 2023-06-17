@@ -17,7 +17,7 @@ import { uploadFiles } from "../../util/Util"
 
 const Drive = () => {
 
-  const { loding, file, error } = useSelector(state => state.fileReducer)
+  const { loading, file, error } = useSelector(state => state.fileReducer)
   const allFiles = file.filter(file => !file.folder)
   const allFolders = file.filter(file => file.folder)
 
