@@ -12,7 +12,7 @@ const Shared = () => {
 
     <>
       <Layout>
-        <View />
+        <View pathname=''/>
         <div className='mt-8'>
           <div className="w-full h-full ">
 

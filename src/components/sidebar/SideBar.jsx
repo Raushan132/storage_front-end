@@ -110,8 +110,12 @@ const SideBar = () => {
              formData.append("parentFolderId", userId);
         
         for (const key of Object.keys(files)){
-            formData.set("files", files[key]);
-
+            
+            formData.append("files", files[key]);
+            
+        }
+       
+        
             const cancelRequest= axios.CancelToken.source();
              setCancelRequests(cancelRequest);
 
@@ -130,8 +134,7 @@ const SideBar = () => {
              })
 
        
-        }
-
+        
 
 
 
@@ -149,7 +152,7 @@ const SideBar = () => {
                     <div>
                         <div> Eternal Space </div>
                     </div>
-                    <div className="mt-10 dropdown dropdown-bottom">
+                    <div className="mt-10 dropdown dropdown-right">
                         <label tabIndex={0} className="btn m-1"><GoPlus className='mr-2' /> New</label>
                         <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-300 rounded-box w-52">
                             <li><div onClick={handleCreateFolder}><AiFillFolder />New Folder</div></li>

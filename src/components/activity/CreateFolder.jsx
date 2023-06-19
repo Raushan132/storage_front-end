@@ -39,7 +39,8 @@ const CreateFolder = () => {
    
 
   return (
-    <div className='flex flex-col gap-4 z-30 fixed left-1/2 top-1/2 border-2 bg-base-100 px-4 py-4 w-96 -translate-x-1/2 -translate-y-1/2 shadow-xl'>
+    <>
+    <div className='flex flex-col gap-4 z-[999] fixed left-1/2 top-1/2 border-2 bg-base-100 px-4 py-4 w-96 -translate-x-1/2 -translate-y-1/2 shadow-xl'>
        <div>
             <label htmlFor='createFolder'>New Folder</label>
        </div>
@@ -52,6 +53,8 @@ const CreateFolder = () => {
        </div>
 
     </div>
+    <div className="fixed opacity-50 z-[990] bg-black w-full h-screen" onClick={handleCancelBtn}></div>
+    </>
   )
 }
 

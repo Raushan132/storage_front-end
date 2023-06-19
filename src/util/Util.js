@@ -97,16 +97,21 @@ export const uploadFiles = (sendingFiles,userId,parentFolderId)=>{
 }
 
 export const deleteFileAndFolder = async (fileId)=>{
-    
-   const   res = await axios.delete(`${baseUrl}/deleteFileOrFolder/${fileId}`,{
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': getCookie()
-      }
-     })
+   try{
 
-     console.log(res.data)
-     return res
+     const   res = await axios.delete(`${baseUrl}/deleteFileOrFolder/${fileId}`,{
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getCookie()
+        }
+       })
+
+       console.log(res.data)
+   }catch(error){
+        console.log("error to remove file or folder")
+   } 
+
+    
 }
 
 export const restoreFileOrFolder = async(trashId) =>{
@@ -124,7 +129,7 @@ export const restoreFileOrFolder = async(trashId) =>{
     }
 }
 
-export const deleteFileAndFolderFovever = async (trashId)=>{
+export const deleteFileAndFolderForvever = async (trashId)=>{
     
   try{
 
@@ -141,5 +146,22 @@ export const deleteFileAndFolderFovever = async (trashId)=>{
   }
 
   
+}
+
+export const allDeleteFileAndFolderForever = async()=>{
+     try{
+        const res = await axios.delete(`${baseUrl}/trash/allDelete`,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': getCookie()
+          }
+        })
+
+        console.log(res.data)
+
+     }catch(error){
+      console.log("error on all deleteFile and folder forever");
+     }
+
 }
 

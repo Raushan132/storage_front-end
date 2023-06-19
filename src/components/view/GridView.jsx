@@ -28,8 +28,10 @@ const GridView = ({ folders, files }) => {
 
    const handleRemove =(fileId)=>{
         
-       deleteFileAndFolder(fileId)
-       dispatch(reRender(render))
+       deleteFileAndFolder(fileId).then(res=>{
+
+           dispatch(reRender(render))
+       })
    }
 
    const handleViewData = (fileId) =>{
@@ -113,8 +115,8 @@ const GridView = ({ folders, files }) => {
                              >
                                 <div className='flex justify-center gap-2 items-center'>
                                     <div className='text-xl'><AiFillFile /></div>
-                                    <div className='flex w-28'>
-                                        {file?.fileName?.substring(0, 15)}
+                                    <div className='flex w-28 tooltip hover:delay-1000' data-tip={file?.fileName}>
+                                        {file?.fileName?.length>12?file?.fileName?.substring(0, 10)+'...':file?.fileName}
                                     </div>
                                 </div>
                                 <div className={`dropdown ${position>52?'dropdown-top':'dropdown-bottom'}   w-full flex justify-end `} >
