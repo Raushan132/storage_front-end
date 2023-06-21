@@ -26,16 +26,34 @@ export const postCreateFolder = async (userId,folderName,parentFolderId)=>{
 
 }
 
-export const getRenameFolder = (formData)=>{
-      
-  axios.patch(`${baseUrl}/renameFile`,formData,{
-    headers:{
-      'Content-Type': 'form-data',
+export const reverseStar = async (fileId)=>{
+    
+  
+     axios.patch(`${baseUrl}/changeStateStarred`,{fileId:fileId},{
+      headers: {
+        'Content-Type': 'application/json',
         'Authorization': getCookie()
-    }
-  }).then(res=>{
-    console.log(res.data)
-  })
+      }
+
+     }).then(res=>{
+      console.log(res.data);
+     })
+}
+
+export const getRenameFolder = async(formData)=>{
+  try{
+
+    await axios.patch(`${baseUrl}/renameFile`,formData,{
+      headers:{
+        'Content-Type': 'form-data',
+        'Authorization': getCookie()
+      }
+    }).then(res=>{
+      console.log(res.data)
+    })
+  }catch(err){
+    console.log("File not rename")
+  }
     
 
 }

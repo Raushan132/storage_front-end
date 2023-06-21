@@ -5,10 +5,9 @@ import { BsThreeDotsVertical } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { fetchFileOrFolderDetail } from '../../redux/fetch/file/fileActions'
-import { getStarred} from '../../util/dropMenuFunctions'
 import { viewDetailOpen } from '../../redux/view_details/detailsActions'
 import { renameVisible } from '../../redux/rename_folder/renameAction'
-import { getDownloadFile,deleteFileAndFolder } from '../../util/Util'
+import { getDownloadFile,deleteFileAndFolder, reverseStar } from '../../util/Util'
 import { reRender } from '../../redux/render/renderAction'
 
 const GridView = ({ folders, files }) => {
@@ -19,11 +18,16 @@ const GridView = ({ folders, files }) => {
     const dispatch = useDispatch()
     
 
-   const handleOpenFolder =(fileId)=>{
-    
+   const handleOpenFolder =(fileId)=>{    
     navigate(`/user/drive/${fileId}`)
+   }
 
-
+   const handleGetStar =(fileId)=>{
+        reverseStar(fileId).then(()=>{
+             dispatch(reRender(render))
+             handleViewData(fileId)
+             console.log("here stared")
+        })
    }
 
    const handleRemove =(fileId)=>{
@@ -52,6 +56,15 @@ const GridView = ({ folders, files }) => {
   
 
     }
+    
+    const dropMenuClick = () => {
+        const elem = document.activeElement;
+        if(elem){
+          elem?.blur();
+        }
+      };
+
+    
 
     if (folders.length == 0 && files.length == 0) {
 
@@ -81,8 +94,8 @@ const GridView = ({ folders, files }) => {
                              >
                                 <div className='flex justify-center gap-2 items-center'>
                                     <div className='text-xl'><AiFillFolder /></div>
-                                    <div className='flex w-28'>
-                                        {folder?.fileName?.substring(0, 15)}
+                                    <div className={`flex w-28 ${folder.fileName?.length>12?'tooltip':''} `} data-tip={folder?.fileName}>
+                                    {folder?.fileName?.length>12?folder?.fileName?.substring(0, 10)+'...':folder?.fileName}
                                     </div>
                                 </div>
                                 <div className={`dropdown ${position>52?'dropdown-top':'dropdown-bottom'}   w-full flex justify-end `} >
@@ -90,13 +103,13 @@ const GridView = ({ folders, files }) => {
                                     <ul tabIndex={0}  className="dropdown-content menu px-2  shadow bg-base-200 rounded-box w-52 translate-x-20 ">
                                        
                                         <li><a>Share</a></li>
-                                        <li><div onClick={()=>{getStarred(folder.fileId)}}>{folder.hasStar?'Remove to star':'Add to star'}</div></li>
-                                        <li><div onClick={()=>{console.log("here3000");dispatch(renameVisible(true))}}>Rename</div></li>
+                                        <li onClick={dropMenuClick}><div onClick={()=>{handleGetStar(folder.fileId)}}>{folder.hasStar?'Remove to star':'Add to star'}</div></li>
+                                        <li onClick={dropMenuClick} ><div onClick={()=>{console.log("here3000");dispatch(renameVisible(true))}}>Rename</div></li>
                                         <hr />
-                                        <li><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
+                                        <li onClick={dropMenuClick} ><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
                                         <li><a>Download</a></li>
                                         <hr />
-                                        <li><div onClick={()=>{handleRemove(folder.fileId)}}>Remove</div></li>
+                                        <li onClick={dropMenuClick}><div onClick={()=>{handleRemove(folder.fileId)}}>Remove</div></li>
                                     </ul>
                                 </div>
                             </div>
@@ -115,7 +128,7 @@ const GridView = ({ folders, files }) => {
                              >
                                 <div className='flex justify-center gap-2 items-center'>
                                     <div className='text-xl'><AiFillFile /></div>
-                                    <div className='flex w-28 tooltip hover:delay-1000' data-tip={file?.fileName}>
+                                    <div className={`flex w-28  ${file.fileName?.length>12?'tooltip':''}`} data-tip={file?.fileName}>
                                         {file?.fileName?.length>12?file?.fileName?.substring(0, 10)+'...':file?.fileName}
                                     </div>
                                 </div>
@@ -124,13 +137,13 @@ const GridView = ({ folders, files }) => {
                                     <ul tabIndex={0}  className="dropdown-content menu px-2  shadow bg-base-200 rounded-box w-52 translate-x-20 ">
                                        
                                         <li><a>Share</a></li>
-                                        <li><div onClick={()=>{getStarred(file.fileId)}}>{file.hasStar?'Remove to star':'Add to star'}</div></li>
-                                        <li><div onClick={()=>{dispatch(renameVisible(true))}}>Rename</div></li>
+                                        <li onClick={dropMenuClick}><div onClick={()=>{handleGetStar(file.fileId)}}>{file.hasStar?'Remove to star':'Add to star'}</div></li>
+                                        <li onClick={dropMenuClick}><div onClick={()=>{dispatch(renameVisible(true))}}>Rename</div></li>
                                         <hr />
-                                        <li><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
-                                        <li><div onClick={()=>{getDownloadFile(file.fileId)}}>Download</div></li>
+                                        <li onClick={dropMenuClick}><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
+                                        <li onClick={dropMenuClick}><div onClick={()=>{getDownloadFile(file.fileId)}}>Download</div></li>
                                         <hr />
-                                        <li><div onClick={()=>{handleRemove(file.fileId)}}>Remove</div></li>
+                                        <li onClick={dropMenuClick}><div onClick={()=>{handleRemove(file.fileId)}}>Remove</div></li>
                                     </ul>
                                 </div>
                             </div>

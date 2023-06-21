@@ -39,7 +39,7 @@ const TrashGridView = ({ trashFiles }) => {
         
 
     }
-    const handleAllDeleteFoever= () =>{
+    const handleAllDeleteForever= () =>{
 
         allDeleteFileAndFolderForever().then(()=>{
              dispatch(reRender(render))
@@ -100,8 +100,8 @@ const TrashGridView = ({ trashFiles }) => {
                                 >
                                     <div className='flex justify-center gap-2 items-center'>
                                         <div className='text-xl'><AiFillFolder /></div>
-                                        <div className='flex w-28'>
-                                            {file?.fileName.substring(0, 15)}
+                                        <div className={`flex w-28  ${file?.fileName.length>12?'tooltip':''}`} data-tip={file?.fileName}>
+                                        {file?.fileName?.length>12?file?.fileName?.substring(0, 10)+'...':file?.fileName}
                                         </div>
                                     </div>
                                     <div className={`dropdown ${position > 52 ? 'dropdown-top' : 'dropdown-bottom'}   w-full flex justify-end `} >
@@ -130,8 +130,8 @@ const TrashGridView = ({ trashFiles }) => {
                                 >
                                     <div className='flex justify-center gap-2 items-center'>
                                         <div className='text-xl'><AiFillFile /></div>
-                                        <div className='flex w-28'>
-                                            {file?.fileName?.substring(0, 15)}
+                                        <div className={`flex w-28  ${file?.fileName.length>12?'tooltip':''}`} data-tip={file?.fileName}>
+                                        {file?.fileName?.length>12?file?.fileName?.substring(0, 10)+'...':file?.fileName}
                                         </div>
                                     </div>
                                     <div className={`dropdown ${position > 52 ? 'dropdown-top' : 'dropdown-bottom'}   w-full flex justify-end `} >
@@ -172,7 +172,7 @@ const TrashGridView = ({ trashFiles }) => {
                     <div className="modal-action">
                       
                         <button className="btn">Cancel</button>
-                        <button className="btn btn-error" onClick={()=>handleAllDeleteFoever()}>Delete</button>
+                        <button className="btn btn-error" onClick={()=>handleAllDeleteForever()}>Delete</button>
                     </div>
                 </form>
             </dialog>

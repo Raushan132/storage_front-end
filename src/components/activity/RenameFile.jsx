@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import { createFolderNotVisible } from "../../redux/create_Folder/createFolderAction";
-import { getRenameFolder, postCreateFolder } from "../../util/Util";
-import { useRef } from "react";
+import { getRenameFolder } from "../../util/Util";
+import {  useRef } from "react";
 import { getUserId } from "../../redux/fetch/baseUrl";
 import { renameVisible } from "../../redux/rename_folder/renameAction";
 import { reRender } from "../../redux/render/renderAction";
@@ -14,8 +13,11 @@ const RenameFile = () => {
     const isVisible= useSelector(state=> state?.renameVisibleReduce)
     const {file} = useSelector(state=> state.singleFileReducer)
     const dispatch = useDispatch();
-   
+
+    const fileName = file.fileName?.substring(0,file.fileName.lastIndexOf(".")>0?file.fileName.lastIndexOf("."):20)
     
+   
+  
 
     
     const handleCancelBtn = ()=>{
@@ -31,9 +33,11 @@ const RenameFile = () => {
         const formData = new FormData()
         formData.append('newFileName',newfileName)
         formData.append('fileId',file.fileId)
-        getRenameFolder(formData)
-        dispatch(renameVisible(false))
-        dispatch(reRender(render))
+        getRenameFolder(formData).then(()=>{
+          dispatch(renameVisible(false))
+          dispatch(reRender(render))
+
+        })
         
       }
         
@@ -49,7 +53,7 @@ const RenameFile = () => {
             <label htmlFor='createFolder'>Rename</label>
        </div>
        <div >
-           <input type="text" ref={folderName} placeholder="File Name" defaultValue={file.fileName} className="input input-bordered input-info w-full max-w-xs" />
+           <input type="text" ref={folderName} placeholder="File Name" defaultValue={fileName} className="input input-bordered input-info w-full max-w-xs" />
        </div>
        <div className='flex gap-5 justify-end'>
             <button className="btn" onClick={handleCancelBtn}>Cancel</button>

@@ -3,6 +3,8 @@ import { MdPublic } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 import { viewDetailClose } from '../../redux/view_details/detailsActions'
 import { baseUrl } from '../../redux/fetch/baseUrl'
+import formatBytes from '../../data/ByteFormat'
+import moment from 'moment'
 
 
 const View_details = () => {
@@ -10,6 +12,19 @@ const View_details = () => {
   const dispatch = useDispatch()
   const { loading, file, error } = useSelector(state => state.singleFileReducer)
  const userId=file?.userId
+
+ const getPath=(path)=>{
+   let location=""
+    const paths = path.split("/");
+    location=paths[1];
+    for(let i=2; i<paths.length;i++)
+       location+="/"+paths[i].split(";")[0]
+    return location
+ }
+
+ const getDate= (date)=>{
+  return "date",moment().format('L')=== moment(date).format("L")?moment(date).format("hh:mm"):moment(date).format("L")
+}
 
   const handleCancelDetail = () => {
     dispatch(viewDetailClose())
@@ -35,13 +50,13 @@ const View_details = () => {
             <div className='font-bold text-lg my-2 mx-4'>File Details</div>
 
             <div className='flex flex-col gap-3'>
-              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>File Name</span><span className='text-[12px] '>{file.fileName.length>32?file.fileName.substring(0,30)+"...":file.fileName}</span></div>
-              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Type:</span><span className='text-[12px] '>{file.fileType}</span></div>
-              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Size:</span><span className='text-[12px] '>{file.folder ? "-" : file.fileSize}</span></div>
-              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Location:</span><span className='text-[12px] '>path</span></div>
+              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>File Name</span><span className='text-[12px] '>{file.fileName.length>32?file.fileName.substring(0,32)+"...":file.fileName}</span></div>
+              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Type:</span><span className='text-[12px] '>{file.fileType.length>32?file.fileType.substring(0,32)+"...":file.fileType}</span></div>
+              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Size:</span><span className='text-[12px] '>{file.folder ? "-" : formatBytes(file.fileSize)}</span></div>
+              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Location:</span><span className='text-[12px] '>{getPath(file.path).substring(0,30)}</span></div>
               <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Owner:</span><span className='text-[12px] '>Me</span></div>
               <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Starred:</span><span className='text-[12px] '>{file.hasStar ? <AiFillStar/> : '-'}</span></div>
-              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Created:</span><span className='text-[12px] '>{file.dateOfOpened}</span></div>
+              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Created:</span><span className='text-[12px] '>{getDate(file.dateOfOpened)}</span></div>
 
             </div>
 

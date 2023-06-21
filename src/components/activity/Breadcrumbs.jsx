@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 
 const Breadcrumbs = ({path}) => {
-    console.log(path)
+    
     return (
         <>
             <div className="max-w-xl text-xl breadcrumbs">
