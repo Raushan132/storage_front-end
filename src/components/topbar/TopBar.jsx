@@ -13,7 +13,7 @@ const TopBar = () => {
     const handleLogout =()=>{
        
             signOut()
-            navigate("/auth")
+            navigate("/auth?logout=true")
     }
 
     return (

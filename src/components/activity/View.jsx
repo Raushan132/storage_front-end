@@ -13,8 +13,14 @@ import { useEffect } from 'react'
 
 const View = ({pathname}) => {
   const breadcrumbs = []
+  if(useLocation().pathname.match('/user/drive/*'))
+     breadcrumbs.push({pathname:'Drive',link:'/user/drive'})
+  else if(useLocation().pathname.match('/user/starred'))
+     breadcrumbs.push({pathname:'Starred',link:'/user/starred'})
+  else if(useLocation().pathname.match('/user/trash'))
+    breadcrumbs.push({pathname:'Trash',link:'/user/trash'})
 
-  breadcrumbs.push({pathname:'Drive',link:'/user/drive'})
+
   if(pathname!==''){
       const paths=  pathname.path.split('/').slice(1)
       

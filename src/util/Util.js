@@ -80,8 +80,9 @@ export const uploadFiles = (sendingFiles,userId,parentFolderId)=>{
    formData.append("userId",userId)
    formData.append("parentFolderId",parentFolderId)
    
+  
    sendingFiles.map(({allFiles,folderName}) => {
-     console.log(allFiles)
+   
      
      formData.set("files",allFiles)
         

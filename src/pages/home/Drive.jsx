@@ -36,13 +36,7 @@ const Drive = () => {
 
 
 
-  
-  
-  const handleDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!e.dataTransfer) return;
-    const items=e.dataTransfer.items
+  const getSendingFiles = async(items)=>{
     const sendingFiles=[]
     const allFiles=[]
     for(let key=0; key<items.length ;key++){
@@ -69,7 +63,18 @@ const Drive = () => {
          
     }
     sendingFiles.push({folderName:'',allFiles})
-    setTimeout(()=>{ uploadFiles(sendingFiles,userId,userId)},500)
+    console.log("first",sendingFiles)
+     return sendingFiles
+  }
+  
+  const handleDrop =  (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!e.dataTransfer) return;
+    const items=e.dataTransfer.items
+
+    getSendingFiles(items).then(sendingFiles=>uploadFiles(sendingFiles,userId,userId))
+    
    
     
   

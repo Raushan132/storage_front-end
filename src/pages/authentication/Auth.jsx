@@ -1,11 +1,20 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Login from "./Login"
 import Signup from "./Signup"
+import {  useSearchParams } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/ReactToastify.min.css";
 
 
 const Auth = () => {
 
   const [login, setLogin] = useState(true)
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  useEffect(()=>{
+
+    if(searchParams.get('logout') !==null)  toast("Logout successfully !");
+  },[])
 
   return (
     <>
@@ -18,11 +27,30 @@ const Auth = () => {
           </div>
 
           <div>
-            { login? <Login /> : <Signup />}
+            {login ? <Login /> : <Signup />}
           </div>
 
         </div>
+
+       
+        
+
       </div>
+      <div className="absolute">
+
+      <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          />
+          </div>
     </>
   )
 }
