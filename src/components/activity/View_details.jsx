@@ -10,8 +10,9 @@ import moment from 'moment'
 const View_details = () => {
 
   const dispatch = useDispatch()
-  const { loading, file, error } = useSelector(state => state.singleFileReducer)
- const userId=file?.userId
+  const { loading, filesInfo, error } = useSelector(state => state.singleFileReducer)
+  const {file,owner} = filesInfo
+  const userId=file?.userId
 
  const getPath=(path)=>{
    let location=""
@@ -38,11 +39,11 @@ const View_details = () => {
       </div>
       <img src="https://www.entoin.com/images/drk1.jpg" alt="nothing is slected" />
 
-    {  file!==''?   <div>
+    {  filesInfo!==''?   <div>
 
           <div className='flex flex-col px-4 my-4'>
             <div>Who has access</div>
-            <div className='px-2'>{file.public ? <span className='flex gap-2 items-center'><MdPublic />Public</span> : 
+            <div className='px-2'>{file?.public ? <span className='flex gap-2 items-center'><MdPublic />Public</span> : 
                   <span className='flex gap-2 items-center text-sm'> <img draggable={false} src={`${ baseUrl+'/img/'+userId}`} alt="" className='w-5 h-5 rounded-full'  />Private to you</span> }</div>
           </div>
           <hr />
@@ -50,11 +51,11 @@ const View_details = () => {
             <div className='font-bold text-lg my-2 mx-4'>File Details</div>
 
             <div className='flex flex-col gap-3'>
-              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>File Name</span><span className='text-[12px] '>{file.fileName.length>32?file.fileName.substring(0,32)+"...":file.fileName}</span></div>
+              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>File Name</span><span className='text-[12px] '>{file.fileName?.length>32?file?.fileName.substring(0,32)+"...":file.fileName}</span></div>
               <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Type:</span><span className='text-[12px] '>{file.fileType.length>32?file.fileType.substring(0,32)+"...":file.fileType}</span></div>
               <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Size:</span><span className='text-[12px] '>{file.folder ? "-" : formatBytes(file.fileSize)}</span></div>
-              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Location:</span><span className='text-[12px] '>{getPath(file.path).substring(0,30)}</span></div>
-              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Owner:</span><span className='text-[12px] '>Me</span></div>
+              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Location:</span><span className='text-[12px] '>{getPath(file?.path).substring(0,30)}</span></div>
+              <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Owner:</span><span className='text-[12px] '>{owner?.name}</span></div>
               <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Starred:</span><span className='text-[12px] '>{file.hasStar ? <AiFillStar/> : '-'}</span></div>
               <div className='flex gap-2 items-center justify-between mx-4'><span className='text-sm'>Created:</span><span className='text-[12px] '>{getDate(file.dateOfOpened)}</span></div>
 

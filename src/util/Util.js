@@ -184,3 +184,62 @@ export const allDeleteFileAndFolderForever = async()=>{
 
 }
 
+// Edit user detail in Edit profile Component
+
+export const editProfile= async(userId,user)=>{
+
+  try{
+    const res = await axios.patch(`${baseUrl}/user/${userId}`,user,{
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie()
+      }
+    })
+
+    console.log(res.data)
+
+ }catch(error){
+  console.log("error on all deleteFile and folder forever");
+ }
+
+   
+}
+
+
+// get shared file 
+
+export const getSharedFiles = async()=>{
+    try{
+       
+    const response= await axios.get(`${baseUrl}/share/shareWithMe`,{
+       headers: {
+          'Content-Type': 'application/json',
+          'Authorization': getCookie()
+        }
+
+      })
+     
+      return response.data
+        
+    }catch(err){
+      console.log(err)
+      return []
+    }
+}
+
+//remove shared file user
+export const removeSharedUser = async (fileId,userId) =>{
+    
+  try{
+
+    const response = await axios.delete(`${baseUrl}/share/${fileId}/${userId}`,{
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie()
+      }
+    })
+    console.log(response.data)
+  }catch(err){
+    console.log(err)
+  }
+}

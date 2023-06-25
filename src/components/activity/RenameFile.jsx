@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { getRenameFolder } from "../../util/Util";
-import {  useRef } from "react";
+import {  useEffect, useRef } from "react";
 import { getUserId } from "../../redux/fetch/baseUrl";
 import { renameVisible } from "../../redux/rename_folder/renameAction";
 import { reRender } from "../../redux/render/renderAction";
@@ -11,9 +11,9 @@ const RenameFile = () => {
 
     const {render} = useSelector(state=> state.isRender)
     const isVisible= useSelector(state=> state?.renameVisibleReduce)
-    const {file} = useSelector(state=> state.singleFileReducer)
+    const {filesInfo} = useSelector(state=> state.singleFileReducer)
     const dispatch = useDispatch();
-
+    const {file} = filesInfo
     const fileName = file.fileName?.substring(0,file.fileName.lastIndexOf(".")>0?file.fileName.lastIndexOf("."):20)
     
    

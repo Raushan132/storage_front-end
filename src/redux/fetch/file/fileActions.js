@@ -112,7 +112,7 @@ export const fetchFileOrFolderDetail = (fileId) => {
  
     return (dispatch) => {
         dispatch(fetchSingleFilesRequest)
-    axios.get(`${baseUrl}/fileDetails/${fileId}`, {
+    axios.get(`${baseUrl}/share/${fileId}`, {
         headers: {
         'Content-Type': 'application/json',
         'Authorization': getCookie()

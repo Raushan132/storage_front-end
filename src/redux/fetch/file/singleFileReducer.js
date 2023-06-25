@@ -2,7 +2,7 @@ import { FETCH_SINGLE_FILE_FAILURE,  FETCH_SINGLE_FILE_REQUEST, FETCH_SINGLE_FIL
 
 const initialState ={
     loading:false,
-    file:'',
+    filesInfo:'',
     error:'',
 }
 
@@ -16,7 +16,7 @@ const singleFileReducer =(state=initialState, action) =>{
         case FETCH_SINGLE_FILE_SUCCESS : return{
             ...state,
             loading:false,
-            file:action.payload
+            filesInfo:action.payload
         }
         case FETCH_SINGLE_FILE_FAILURE : return{
             ...state, 

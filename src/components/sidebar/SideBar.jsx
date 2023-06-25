@@ -12,6 +12,7 @@ import { createFolderVisible } from '../../redux/create_Folder/createFolderActio
 import { baseUrl, getCookie, getUserId } from '../../redux/fetch/baseUrl'
 import RenameFile from '../activity/RenameFile'
 import { reRender } from '../../redux/render/renderAction'
+import ShareDialog from '../activity/ShareDialog'
 
 
 const SideBar = () => {
@@ -21,6 +22,7 @@ const SideBar = () => {
 
     const iscreateFolderVisible= useSelector(state=> state?.isCreateFolderVisible);
     const {visible}= useSelector(state=> state?.renameVisibleReduce);
+    const {shareBtnVisible} = useSelector(state=> state.isShareBtnVisible)
     const isrenameFileVisible=visible
     const dispatch = useDispatch()
     const handleCreateFolder = ()=>{
@@ -146,6 +148,7 @@ const SideBar = () => {
         <>
             {iscreateFolderVisible && <CreateFolder />}
             {isrenameFileVisible && <RenameFile/>}
+           { shareBtnVisible && <ShareDialog />}
             <div className=' shadow-xl bg-base-200 h-screen fixed z-20'>
                 <div className=' px-8 my-16  w-full'>
 

@@ -32,6 +32,12 @@ const ListView = ({ data }) => {
 
     }
 
+    const handleRename = ()=>{
+         setTimeout(()=>{
+            dispatch(renameVisible(true))
+        },100)
+    }
+
     
 
     const handleGetStar =(fileId)=>{
@@ -50,7 +56,7 @@ const ListView = ({ data }) => {
 }
 
 
-const handleViewData = (fileId) =>{
+const handleViewData =  (fileId) =>{
     dispatch(fetchFileOrFolderDetail(fileId))
 }
 
@@ -132,7 +138,7 @@ const handlePosition = (e) =>{
                                         {/* <div className='cursor-pointer'>
                                             <AiOutlineDownload />
                                         </div> */}
-                                        <div className='cursor-pointer' onClick={()=>{dispatch(renameVisible(true))}}>
+                                        <div className='cursor-pointer' onClick={handleRename}>
                                             <AiFillEdit />
                                         </div>
                                         <div className='cursor-pointer'>
@@ -179,7 +185,7 @@ const handlePosition = (e) =>{
                                         <div className='cursor-pointer' onClick={()=>{getDownloadFile(file.fileId)}}>
                                             <AiOutlineDownload />
                                         </div>
-                                        <div className='cursor-pointer' onClick={()=>{dispatch(renameVisible(true));}} >
+                                        <div className='cursor-pointer' onClick={handleRename} >
                                             <AiFillEdit />
                                         </div>
                                         <div className='cursor-pointer'>
