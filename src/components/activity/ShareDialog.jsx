@@ -1,16 +1,20 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { baseUrl, getUserId } from '../../redux/fetch/baseUrl'
 import { useDispatch, useSelector } from 'react-redux'
 import { shareVisible } from '../../redux/share_files/shareBtnAction'
 import { fetchShareFileAndUser, shareFileAndFolder } from '../../redux/share_files/shareFileActions'
 import { reRender } from '../../redux/render/renderAction'
-import { removeSharedUser } from '../../util/Util'
+import { changePermission, removeSharedUser } from '../../util/Util'
+import { PRIVATE, PUBLIC } from '../../util/constant'
 
 const ShareDialog = () => {
 
     const { loading, sharedUserInfo, error } = useSelector(state => state.sharedFileAndUserReducer)
+    const [updatePermission, setupdatePermission] = useState(false);
+    const { render } = useSelector(state => state.isRender)
+    
 
-   const email =useRef('')
+    const email = useRef('')
 
     const dispatch = useDispatch()
 
@@ -19,23 +23,52 @@ const ShareDialog = () => {
 
     }
     const handleAddBtn = () => {
-      const fileId= sharedUserInfo?.file?.fileId;
-      let validate =/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
-      const emailVal = email.current.value
-       if(emailVal!=='' && emailVal.match(validate)){
-                shareFileAndFolder(fileId,emailVal).then(()=>{
-                     dispatch(fetchShareFileAndUser(fileId))
-                })
-       }
+        const fileId = sharedUserInfo?.file?.fileId;
+        let validate = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+        const emailVal = email.current.value
+        if (emailVal !== '' && emailVal!==sharedUserInfo?.owner?.email &&emailVal.match(validate)) {
+            shareFileAndFolder(fileId, emailVal).then(() => {
+                dispatch(fetchShareFileAndUser(fileId))
+            })
+        }
     }
 
-    const handleRemoveUser = (userId)=>{
-         const fileId = sharedUserInfo?.file?.fileId
-         console.log(userId)
-         removeSharedUser(fileId,userId).then(()=>{
+    const handleRemoveUser = (userId) => {
+        const fileId = sharedUserInfo?.file?.fileId
+        console.log(userId)
+        removeSharedUser(fileId, userId).then(() => {
             dispatch(fetchShareFileAndUser(fileId))
-         })
+        })
     }
+
+    const handleAccess = (e) => {
+        setupdatePermission(true)
+        changePermission(sharedUserInfo?.file?.fileId, e.target.value).then(() => {
+            console.log("render",render)
+            dispatch(fetchShareFileAndUser(sharedUserInfo?.file?.fileId))
+            setupdatePermission(false);
+            dispatch(reRender(render))
+        }).catch((err) => {
+            setupdatePermission(false);
+        })
+
+    }
+
+    
+
+    const handleGetLink = () => {
+        if (sharedUserInfo !== '') {
+           
+            if (sharedUserInfo.file.public) {
+                navigator.clipboard.writeText(`http://localhost:5173/share/public/file/${sharedUserInfo?.file?.fileId}`)
+            } else {
+                navigator.clipboard.writeText(`http://localhost:5173/share/private/file/${sharedUserInfo?.file?.fileId}`)
+            }
+        }
+    }
+
+      
+    
 
     if (loading) {
         return (
@@ -64,7 +97,7 @@ const ShareDialog = () => {
 
                 <div>
                     <div>People with access</div>
-                    <div className={`${sharedUserInfo?.sharedWithUsers?.length>0?'max-h-24':'h-20'} overflow-y-auto`}>
+                    <div className={`${sharedUserInfo?.sharedWithUsers?.length > 0 ? 'max-h-24' : 'h-20'} overflow-y-auto`}>
 
                         <div className='flex justify-between px-4 my-2 w-full'>
                             <div className='flex items-center gap-4'>
@@ -89,7 +122,7 @@ const ShareDialog = () => {
                                             <div className='text-[11px]'>{otherUser.email}</div>
                                         </div>
                                     </div>
-                                    <div className='cursor-pointer' onClick={()=>handleRemoveUser(otherUser.userId)}>Remove</div>
+                                    <div className='cursor-pointer' onClick={() => handleRemoveUser(otherUser.userId)}>Remove</div>
                                 </div>
                             );
                         })}
@@ -97,16 +130,20 @@ const ShareDialog = () => {
                     </div>
                 </div>
 
-                <div>
+                {!sharedUserInfo?.file?.folder && <div>
                     <div>General Access</div>
-                    <select className="select select-sm select-info  max-w-xs  my-2 ">
-                        <option selected={true}>Restricted</option>
-                        <option selected={false} >Anyone with the link</option>
+                    <div className={`${updatePermission ? 'flex justify-between items-center' : ''}`}>
 
-                    </select>
-                </div>
-                <div className='flex justify-between items-center'>
-                    <div><button className='btn btn-sm'>Get Link</button></div>
+                        <select className="select select-sm select-info  max-w-xs  my-2 " onChange={handleAccess} disabled={updatePermission}>
+                            <option selected={sharedUserInfo?.file?.public ? false : true} value={PRIVATE}>Restricted</option>
+                            <option selected={sharedUserInfo?.file?.public ? true : false} value={PUBLIC}>Anyone with the link</option>
+
+                        </select>
+                        {updatePermission && <div>Updating...</div>}
+                    </div>
+                </div>}
+                <div className={`flex  ${sharedUserInfo?.file?.folder ? 'items-end justify-end' : 'justify-between items-center'}`}>
+                    {!sharedUserInfo?.file?.folder && <div><button className='btn btn-sm' onClick={handleGetLink} >Get Link</button></div>}
                     <div><button className='btn btn-sm btn-primary' onClick={handleCancelBtn}>Done</button></div>
                 </div>
             </div>

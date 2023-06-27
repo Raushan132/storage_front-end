@@ -109,7 +109,7 @@ const GridView = ({ folders, files }) => {
                                     <label tabIndex={0} onClick={handlePosition}  className=" cursor-pointer" ><BsThreeDotsVertical /></label>
                                     <ul tabIndex={0}  className="dropdown-content menu px-2  shadow bg-base-200 rounded-box w-52 translate-x-20 ">
                                        
-                                        <li><div onClick={()=>handleShare(folder.fileId)}>Share</div></li>
+                                        {/* <li><div onClick={()=>handleShare(folder.fileId)}>Share</div></li> */}
                                         <li onClick={dropMenuClick}><div onClick={()=>{handleGetStar(folder.fileId)}}>{folder.hasStar?'Remove to star':'Add to star'}</div></li>
                                         <li onClick={dropMenuClick} ><div onClick={()=>{console.log("here3000");dispatch(renameVisible(true))}}>Rename</div></li>
                                         <hr />

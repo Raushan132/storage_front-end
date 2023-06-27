@@ -10,6 +10,7 @@ import EditProfile from './pages/profile/EditProfile'
 import Auth from './pages/authentication/Auth'
 import { RequireAuth } from 'react-auth-kit'
 import DriveFolder from './pages/home/DriveFolder'
+import SharedDownload from './pages/share/SharedDownload'
 
 
 
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/"  element={<Navigate  to="/auth"/>} />
             
+              <Route path="/share/*" element={<SharedDownload />} />
 
               <Route index path='/user/drive' element={
                 <RequireAuth loginPath={'/auth'}> <Drive /></RequireAuth>

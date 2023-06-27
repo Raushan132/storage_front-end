@@ -10,6 +10,8 @@ import { deleteFileAndFolder, getDownloadFile, reverseStar } from '../../util/Ut
 import { fetchFileOrFolderDetail } from '../../redux/fetch/file/fileActions';
 import { viewDetailOpen } from '../../redux/view_details/detailsActions';
 import { renameVisible } from '../../redux/rename_folder/renameAction';
+import { shareVisible } from '../../redux/share_files/shareBtnAction';
+import { fetchShareFileAndUser } from '../../redux/share_files/shareFileActions';
 
 
 
@@ -29,6 +31,12 @@ const ListView = ({ data }) => {
 
         navigate(`/user/drive/${fileId}`)
 
+
+    }
+
+    const handleShare=(fileId)=>{
+        dispatch(shareVisible(true))
+        dispatch(fetchShareFileAndUser(fileId))
 
     }
 
@@ -147,17 +155,14 @@ const handlePosition = (e) =>{
                                     </div>
                                 </td>
                                 <td>
-                                <div className={`dropdown ${position>52?'dropdown-top':'dropdown-bottom'}   w-full flex justify-center `} >
+                                <div className={`dropdown ${position>55?'dropdown-top':'dropdown-bottom'}   w-full flex justify-center `} >
                                     <label tabIndex={0} onClick={handlePosition}  className=" cursor-pointer" ><BsThreeDotsVertical /></label>
                                     <ul tabIndex={0}  className="dropdown-content menu px-2  shadow bg-base-200 rounded-box w-52 -translate-x-20 ">
                                        
-                                        <li><a>Share</a></li>
+                                        <li onClick={dropMenuClick} ><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
+                                        {/* <li><a>Share</a></li> */}
                                         <li onClick={dropMenuClick}><div onClick={()=>{handleGetStar(file.fileId)}}>{file.hasStar?'Remove to star':'Add to star'}</div></li>
                                         <li onClick={dropMenuClick} ><div onClick={()=>{dispatch(renameVisible(true))}}>Rename</div></li>
-                                        <hr />
-                                        <li onClick={dropMenuClick} ><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
-                                        <li><a>Download</a></li>
-                                        <hr />
                                         <li onClick={dropMenuClick}><div onClick={()=>{handleRemove(file.fileId)}}>Remove</div></li>
                                     </ul>
                                 </div>
@@ -194,17 +199,17 @@ const handlePosition = (e) =>{
                                     </div>
                                 </td>
                                 <td>
-                                <div className={`dropdown ${position>52?'dropdown-top':'dropdown-bottom'}   w-full flex justify-center `} >
+                                <div className={`dropdown ${position>55?'dropdown-top':'dropdown-bottom'}   w-full flex justify-center `} >
                                     <label tabIndex={0} onClick={handlePosition}  className=" cursor-pointer" ><BsThreeDotsVertical /></label>
                                     <ul tabIndex={0}  className="dropdown-content menu px-2  shadow bg-base-200 rounded-box w-52 -translate-x-20 ">
                                        
-                                        <li><a>Share</a></li>
+                                        <li onClick={dropMenuClick}><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
+                                    <li onClick={dropMenuClick}><div onClick={()=>handleShare(file.fileId)}>Share</div></li>
                                         <li onClick={dropMenuClick}><div onClick={()=>{handleGetStar(file.fileId)}}>{file.hasStar?'Remove to star':'Add to star'}</div></li>
                                         <li onClick={dropMenuClick}><div onClick={()=>{dispatch(renameVisible(true))}}>Rename</div></li>
-                                        <hr />
-                                        <li onClick={dropMenuClick}><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
+                                       
                                         <li onClick={dropMenuClick}><div onClick={()=>{getDownloadFile(file.fileId)}}>Download</div></li>
-                                        <hr />
+                                        
                                         <li onClick={dropMenuClick}><div onClick={()=>{handleRemove(file.fileId)}}>Remove</div></li>
                                     </ul>
                                 </div>

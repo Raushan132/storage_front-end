@@ -59,18 +59,60 @@ export const getRenameFolder = async(formData)=>{
 }
 
 export const getDownloadFile = async (fileId)=>{
-   const res = await axios.get(`${baseUrl}/download/${fileId}`, {
-    headers: {
-      'Content-Type': 'form-data',
-      'Authorization': getCookie()
-    },
-    responseType: 'blob'
-  })
-  const blob = new Blob([res.data], { type: res.headers.getContentType() })
-  const link = document.createElement('a')
-  link.href = window.URL.createObjectURL(blob)
-  link.download = res.headers.filename
-  link.click()
+  try{
+
+    const res = await axios.get(`${baseUrl}/download/${fileId}`, {
+      headers: {
+        'Content-Type': 'form-data',
+        'Authorization': getCookie()
+      },
+      responseType: 'blob'
+    })
+    const blob = new Blob([res.data], { type: res.headers.getContentType() })
+    const link = document.createElement('a')
+    link.href = window.URL.createObjectURL(blob)
+    link.download = res.headers.filename
+    link.click()
+  } catch(err){
+    console.log(err)
+
+    throw err
+  }
+}
+
+export const getDownloadPublicFile = async (fileId)=>{
+  
+
+    const res = await axios.get(`${baseUrl}/permission/download/${fileId}`, {
+     headers: {
+       'Content-Type': 'form-data',
+     },
+     responseType: 'blob'
+   })
+   
+   const blob = new Blob([res.data], { type: res.headers.getContentType() })
+   const link = document.createElement('a')
+   link.href = window.URL.createObjectURL(blob)
+   link.download = res.headers.filename
+   link.click()
+   
+}
+
+export const changePermission= async (fileId,permission)=>{
+   try{
+
+   const res=  await axios.patch(`${baseUrl}/changePermission`,{fileId:fileId,public:permission},{
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie()
+      }
+    })
+    return res
+     
+   }catch(err){
+       throw err
+   }
+
 }
 
 
