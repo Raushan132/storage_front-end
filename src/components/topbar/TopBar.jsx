@@ -30,6 +30,8 @@ const TopBar = () => {
                             </button>
                         </div>
                     </div>
+                    <div>
+                    
                     <div className="dropdown dropdown-end pr-6">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
@@ -40,12 +42,13 @@ const TopBar = () => {
                             <li>
                                 <Link to="/user/profile" className="justify-between">
                                     Profile
-                                    <span className="badge">New</span>
+                                   
                                 </Link>
                             </li>
-                            <li><a>Settings</a></li>
+                            <li>  <label htmlFor="custom_themes">Themes</label></li>
                             <li><div className="cursor-pointer" onClick={handleLogout}>Logout</div></li>
                         </ul>
+                    </div>
                     </div>
                 </div>
             </div>

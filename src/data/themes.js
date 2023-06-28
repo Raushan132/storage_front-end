@@ -1,0 +1,7 @@
+export const LIGHT ='light'
+export const DARK ='dark'
+export const CUPCAKE ='cupcake'
+export const AQUA ='aqua'
+export const FOREST ='forest'
+export const NIGHT ='night'
+export const WIREFRAME ='wireframe'
