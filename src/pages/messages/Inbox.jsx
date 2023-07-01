@@ -9,35 +9,15 @@ const Inbox = ({data}) => {
   
      
 
-    const columns=[{
-        
-        cell: (row)=> row?.name
-        },
-        {
-        
-            cell: (row)=> row.subject
-        },
-        {
-        
-            cell: (row)=> row.message
-        }
-
-    ]
+  
 
 
     console.log(data)
 
   return (
-    <div className='bg-base-200 lg:w-[90%] max-h-[450px] overflow-y-auto my-8'>Inbox
+    <div className='bg-base-200 lg:w-[90%] max-h-[450px] overflow-y-auto my-8'>
     
-      <DataTable 
-       columns={columns}
-        data={data}
-        pointerOnHover
-        noTableHead={true}
-        customStyles={customStyles}
-        highlightOnHover
-      />
+      
 
 
       <table className='w-full'>

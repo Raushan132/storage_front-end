@@ -8,10 +8,9 @@ export const getCookie = (key='_auth=')=>{
     
     if(cookies!=''){
      
-     const  token = cookies.split(';').find((row)=> row.startsWith(key))?.split('=')[1];
-    //  console.log(cookies.split(';').find((row)=> row.startsWith(key))?.split('=')[1])
-    //  console.log("token",token)
-        
+    //  const  token = cookies.split(';').find((row)=> row.startsWith(key))?.split('=')[1];
+     const token=cookies.split(';').filter(row=> row.includes(key))[0]?.split('=')[1];
+       
        return token
     }
 }

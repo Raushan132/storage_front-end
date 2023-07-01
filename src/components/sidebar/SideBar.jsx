@@ -25,6 +25,7 @@ const SideBar = () => {
     const {shareBtnVisible} = useSelector(state=> state.isShareBtnVisible)
     const isrenameFileVisible=visible
     const dispatch = useDispatch()
+   
     const handleCreateFolder = ()=>{
          if(!iscreateFolderVisible)
             dispatch(createFolderVisible())

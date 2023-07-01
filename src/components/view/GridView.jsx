@@ -1,5 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { AiFillFolder, AiFillFile, AiFillFolderOpen, AiOutlineStar, AiFillStar, AiOutlineDownload, AiFillEdit } from 'react-icons/ai'
+import React, { useState } from 'react'
+import { AiFillFolder, AiFillFolderOpen } from 'react-icons/ai'
+import { Icon } from "@fluentui/react/lib/Icon";
+import { getFileTypeIconProps } from "@fluentui/react-file-type-icons";
+import { initializeFileTypeIcons } from "@fluentui/react-file-type-icons";
 
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,6 +14,9 @@ import { getDownloadFile,deleteFileAndFolder, reverseStar } from '../../util/Uti
 import { reRender } from '../../redux/render/renderAction'
 import { shareVisible } from '../../redux/share_files/shareBtnAction'
 import { fetchShareFileAndUser } from '../../redux/share_files/shareFileActions'
+
+
+initializeFileTypeIcons();
 
 const GridView = ({ folders, files }) => {
 
@@ -134,7 +140,7 @@ const GridView = ({ folders, files }) => {
                              onClick={()=>{handleViewData(file.fileId)}}
                              >
                                 <div className='flex justify-center gap-2 items-center'>
-                                    <div className='text-xl'><AiFillFile /></div>
+                                   <Icon {...getFileTypeIconProps({ extension: file.extension, size: 24 })} />
                                     <div className={`flex w-28  ${file.fileName?.length>12?'tooltip':''}`} data-tip={file?.fileName}>
                                         {file?.fileName?.length>12?file?.fileName?.substring(0, 10)+'...':file?.fileName}
                                     </div>

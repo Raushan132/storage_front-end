@@ -9,6 +9,12 @@ import { useNavigate } from 'react-router-dom'
 import { fetchFileOrFolderDetail } from '../../redux/fetch/file/fileActions'
 import { viewDetailOpen } from '../../redux/view_details/detailsActions'
 
+import { Icon } from "@fluentui/react/lib/Icon";
+import { getFileTypeIconProps } from "@fluentui/react-file-type-icons";
+import { initializeFileTypeIcons } from "@fluentui/react-file-type-icons";
+
+initializeFileTypeIcons();
+
 const SharedGridView = ({folders,files}) => {
    
     const {render} = useSelector(state=> state.isRender)
@@ -119,7 +125,7 @@ const SharedGridView = ({folders,files}) => {
                              onClick={()=>{handleViewData(file.fileId)}}
                              >
                                 <div className='flex justify-center gap-2 items-center'>
-                                    <div className='text-xl'><AiFillFile /></div>
+                                <Icon {...getFileTypeIconProps({ extension: file?.extension, size: 24 })} />
                                     <div className={`flex w-28  ${file.fileName?.length>12?'tooltip':''}`} data-tip={file?.fileName}>
                                         {file?.fileName?.length>12?file?.fileName?.substring(0, 10)+'...':file?.fileName}
                                         

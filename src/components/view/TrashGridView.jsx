@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { AiFillFolder, AiFillFile, AiFillFolderOpen, AiOutlineStar, AiFillStar, AiOutlineDownload, AiFillEdit } from 'react-icons/ai'
+import { Icon } from "@fluentui/react/lib/Icon";
+import { getFileTypeIconProps } from "@fluentui/react-file-type-icons";
+import { initializeFileTypeIcons } from "@fluentui/react-file-type-icons";
 
 import { BsThreeDotsVertical, BsFillTrashFill } from 'react-icons/bs'
 import { allDeleteFileAndFolderForever, deleteFileAndFolderForvever, restoreFileOrFolder } from '../../util/Util'
@@ -7,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { reRender } from '../../redux/render/renderAction'
 
 
+initializeFileTypeIcons();
 
 const TrashGridView = ({ trashFiles }) => {
 
@@ -129,7 +133,7 @@ const TrashGridView = ({ trashFiles }) => {
                                     onClick={() => { handleViewData(file.fileId) }}
                                 >
                                     <div className='flex justify-center gap-2 items-center'>
-                                        <div className='text-xl'><AiFillFile /></div>
+                                        <Icon {...getFileTypeIconProps({ extension: file?.extension, size: 24 })} />
                                         <div className={`flex w-28  ${file?.fileName.length>12?'tooltip':''}`} data-tip={file?.fileName}>
                                         {file?.fileName?.length>12?file?.fileName?.substring(0, 10)+'...':file?.fileName}
                                         </div>

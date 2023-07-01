@@ -32,9 +32,9 @@ const View_details = () => {
   }
 
   return (
-    <div className='bg-gray-900  w-[310px] h-[565px] overflow-y-auto'>
+    <div className=' shadow-2xl bg-base-200   w-[310px] h-[565px] overflow-y-auto'>
       <div className='flex justify-between items-center pr-5'>
-        <div className='text-xl  bg-gray-900 inline-flex w-32 h-10 justify-center items-end mb-2'><span className='border-0 border-b-[2px] border-blue-900 '>Details</span> </div>
+        <div className='text-xl  shadow-inner inline-flex w-32 h-10 justify-center items-end mb-2'><span className='border-0 border-b-[2px] border-blue-900 '>Details</span> </div>
         <div className='text-xl cursor-pointer' onClick={handleCancelDetail}><AiOutlineClose /></div>
       </div>
       <img src="https://www.entoin.com/images/drk1.jpg" alt="nothing is slected" />

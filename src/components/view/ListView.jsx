@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import { AiTwotoneFolderOpen, AiFillFile, AiOutlineStar, AiFillStar, AiOutlineDownload, AiFillEdit, AiFillFolderOpen } from 'react-icons/ai'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import { Icon } from "@fluentui/react/lib/Icon";
+import { getFileTypeIconProps } from "@fluentui/react-file-type-icons";
+import { initializeFileTypeIcons } from "@fluentui/react-file-type-icons";
+
+
 import formatBytes from '../../data/ByteFormat';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +20,7 @@ import { fetchShareFileAndUser } from '../../redux/share_files/shareFileActions'
 
 
 
+initializeFileTypeIcons();
 
 const ListView = ({ data }) => {
 
@@ -178,7 +184,7 @@ const handlePosition = (e) =>{
                             onClick={()=>{handleViewData(file.fileId)}}
                             >
                                 <td className='w-72 flex gap-2 items-center '>
-                                    <span className='text-xl'><AiFillFile /></span>
+                                <Icon {...getFileTypeIconProps({ extension: file.extension, size: 24 })} />
                                     <span>{file?.fileName?.length > 22 ? file?.fileName?.substring(0, 20) + '...' : file?.fileName}</span>
                                 </td>
                                 <td className='w-48'>{file.fileType?.length > 22 ? file.fileType.substring(0, 20) + "..." : file.fileType}</td>

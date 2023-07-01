@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fluentui/react": "^8.110.7",
+    "@fluentui/react-file-type-icons": "^8.9.3",
     "axios": "^1.4.0",
     "buffer": "^6.0.3",
     "daisyui": "^2.52.0",

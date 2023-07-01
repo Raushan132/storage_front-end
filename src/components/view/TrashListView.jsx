@@ -2,10 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { AiFillFile, AiFillFolder } from 'react-icons/ai'
 import { BsFillTrashFill, BsThreeDotsVertical } from 'react-icons/bs'
 import formatBytes from '../../data/ByteFormat'
+import { Icon } from "@fluentui/react/lib/Icon";
+import { getFileTypeIconProps } from "@fluentui/react-file-type-icons";
+import { initializeFileTypeIcons } from "@fluentui/react-file-type-icons";
+
 import moment from 'moment'
 import { allDeleteFileAndFolderForever, deleteFileAndFolderForvever, restoreFileOrFolder } from '../../util/Util'
 import { useDispatch, useSelector } from 'react-redux'
 import { reRender } from '../../redux/render/renderAction'
+
+
+initializeFileTypeIcons();
 
 const TrashListView = ({ data }) => {
 
@@ -144,7 +151,7 @@ const TrashListView = ({ data }) => {
                                 return (
                                     <tr className='hover cursor-pointer' key={trashId}>
                                         <td className='w-72 flex gap-2 items-center '>
-                                            <span className='text-xl'><AiFillFile/></span>
+                                        <Icon {...getFileTypeIconProps({ extension: file?.extension, size: 24 })} />
                                             <span>{file?.fileName?.length>22?file?.fileName?.substring(0, 20)+'...':file?.fileName}</span>
                                         </td>
                                         <td>{file?.fileType}</td>

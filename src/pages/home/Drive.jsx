@@ -34,6 +34,10 @@ const Drive = () => {
   const currentView = useSelector(state => state?.viewLayout)
   const isViewDetailsVisible = useSelector(state => state?.isDetailsVisible) === VIEW_DETAIL_OPEN
 
+  const handleCreateFolder = ()=>{
+         if(!iscreateFolderVisible)
+            dispatch(createFolderVisible())
+    }
 
 
   const getSendingFiles = async(items)=>{
@@ -74,10 +78,7 @@ const Drive = () => {
     const items=e.dataTransfer.items
 
     getSendingFiles(items).then(sendingFiles=>uploadFiles(sendingFiles,userId,userId))
-    
-   
-    
-  
+      
   }
 
   return (
@@ -92,6 +93,7 @@ const Drive = () => {
               onDragOver={(e) => { e.preventDefault(); console.log('drag enter'); }}
               onDrop={handleDrop}
               className="w-full min-h-[550px] overflow-y-auto"
+             
             >
               {currentView === LISTVIEW ? <ListView data={[...allFolders, ...allFiles]} /> : <GridView folders={allFolders} files={allFiles} />}
             </div>
