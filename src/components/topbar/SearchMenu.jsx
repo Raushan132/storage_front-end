@@ -12,7 +12,7 @@ const SearchMenu = ({ handleQuery, query,handleSearchBtn }) => {
 
 
   return (
-    <div className="dropdown dropdown-open">
+    <div className="dropdown ">
       <label tabIndex={0} className="btn m-1 text-xl"><BsFilter /></label>
       <ul tabIndex={0} className="dropdown-content z-[1] menu px-2 py-8 shadow bg-base-300 rounded-box w-96 -translate-x-1/2">
         <div className="flex flex-col gap-5 px-5">
@@ -21,7 +21,7 @@ const SearchMenu = ({ handleQuery, query,handleSearchBtn }) => {
             <span>
               <select className="select select-bordered w-full select-sm max-w-sm" name="type" onChange={handleQuery}>
                 <option value="" >Any</option>
-                <option vlaue="images">Photos & Images</option>
+                <option value="image">Photos & Images</option>
                 <option value="pdf">PDF</option>
                 <option value="audio">Audio</option>
                 <option value="video">Video</option>

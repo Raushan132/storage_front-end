@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { reRender } from '../../redux/render/renderAction'
 
 
-initializeFileTypeIcons();
+// initializeFileTypeIcons();
 
 const TrashGridView = ({ trashFiles }) => {
 

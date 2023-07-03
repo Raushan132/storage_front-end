@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AiTwotoneFolderOpen, AiFillFile, AiOutlineStar, AiFillStar, AiOutlineDownload, AiFillEdit, AiFillFolderOpen } from 'react-icons/ai'
+import { AiTwotoneFolderOpen, AiOutlineStar, AiFillStar, AiOutlineDownload, AiFillEdit, AiFillFolderOpen } from 'react-icons/ai'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { Icon } from "@fluentui/react/lib/Icon";
 import { getFileTypeIconProps } from "@fluentui/react-file-type-icons";
@@ -20,7 +20,7 @@ import { fetchShareFileAndUser } from '../../redux/share_files/shareFileActions'
 
 
 
-initializeFileTypeIcons();
+// initializeFileTypeIcons();
 
 const ListView = ({ data }) => {
 
@@ -30,7 +30,7 @@ const ListView = ({ data }) => {
     const dispatch = useDispatch()
 
     const getDate = (date) => {
-        return "date", moment().format('L') === moment(date).format("L") ? moment(date).format("hh:mm") : moment(date).format("L")
+        return "date", moment().format('L') === moment(date).format("L") ? "Today, "+moment(date).format("hh:mm") : moment(date).format("L")
     }
 
     const handleOpenFolder = (fileId) => {
@@ -96,7 +96,7 @@ const handlePosition = (e) =>{
 
 
    if (data?.length == 0 ) {
-   console.log(data)
+  
     return (
         <>
             <div className='absolute flex flex-col justify-center items-center left-[60%] top-1/2 -translate-x-1/2 -translate-y-1/2'>
@@ -182,6 +182,7 @@ const handlePosition = (e) =>{
 
                             <tr className='hover'
                             onClick={()=>{handleViewData(file.fileId)}}
+                            key={file.fileId}
                             >
                                 <td className='w-72 flex gap-2 items-center '>
                                 <Icon {...getFileTypeIconProps({ extension: file.extension, size: 24 })} />

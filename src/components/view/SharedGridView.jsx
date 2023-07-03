@@ -13,7 +13,7 @@ import { Icon } from "@fluentui/react/lib/Icon";
 import { getFileTypeIconProps } from "@fluentui/react-file-type-icons";
 import { initializeFileTypeIcons } from "@fluentui/react-file-type-icons";
 
-initializeFileTypeIcons();
+// initializeFileTypeIcons();
 
 const SharedGridView = ({folders,files}) => {
    
@@ -63,7 +63,6 @@ const SharedGridView = ({folders,files}) => {
 
 
 
- console.log(folders,files)
     if (folders.length == 0 && files.length == 0) {
 
         return (

@@ -34,9 +34,10 @@ const TopBar = () => {
             }
             else if(keys!=='dateOption' && query[keys] !='')
                 q+=`${keys}:`+query[keys]+" "
+           
         }
         
-
+        
         if(q!=''){
             navigate(`/user/search?q=${q.trim()}`)
         }

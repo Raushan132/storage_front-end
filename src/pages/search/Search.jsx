@@ -1,19 +1,29 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../layout/layout'
 import View from '../../components/activity/View'
 import { useSearchParams } from 'react-router-dom';
 import { baseUrl, getCookie } from '../../redux/fetch/baseUrl';
 import axios from 'axios';
+import SearchView from '../../components/view/SearchView';
+import { useSelector } from 'react-redux';
 
 const Search = () => {
    
+    const{render} = useSelector(state=> state.isRender)
     const [searchParams] = useSearchParams();
     const query = searchParams.get('q');
- 
+    const [search,setSearch] = useState({
+        files:[],
+        sharedFileInfos:[],
+        trashes:[]
+    });
+  
+     console.log(search);
     useEffect(()=>{
         const fatchFile=async()=>{
          try{
-               await axios.get(`${baseUrl}/search`,{
+             
+         const response=      await axios.get(`${baseUrl}/search`,{
                 params: {
                     request: query,
                 },
@@ -22,6 +32,10 @@ const Search = () => {
                     'Authorization': getCookie()
                   }
                })
+            console.log("33",response.data)
+            setSearch(response.data);
+
+
          }catch(err){
 
          }
@@ -29,7 +43,7 @@ const Search = () => {
 
         fatchFile(query)
 
-    },[query])
+    },[query,render])
 
     return (
         <>
@@ -40,7 +54,7 @@ const Search = () => {
 
                     <div className="w-full min-h-[550px]  overflow-y-auto">
 
-                        {/* {currentView === LISTVIEW ? <TrashListView data={file} /> : <TrashGridView trashFiles={file} />} */}
+                        <SearchView search={search}/>
 
                     </div>
 
