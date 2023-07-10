@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useRef } from 'react'
 import { useIsAuthenticated, useSignIn } from 'react-auth-kit'
 import { useNavigate } from 'react-router-dom'
+import { baseUrl } from '../../redux/fetch/baseUrl'
 
 
 const Login = () => {
@@ -26,7 +27,7 @@ const Login = () => {
             password:'guest'
          }
 
-         axios.post("http://localhost:8081/signIn", formData, { auth: { username: formData.username, password: formData.password } })
+         axios.post(`${baseUrl}/signIn`, formData, { auth: { username: formData.username, password: formData.password } })
             .then(res => {
                 const now = new Date(Number(res.headers?.expires));
                              
@@ -54,7 +55,7 @@ const Login = () => {
             password: password.current.value
         }
         
-        axios.post("http://localhost:8081/signIn", formData, { auth: { username: formData.username, password: formData.password } })
+        axios.post(`${baseUrl}/signIn`, formData, { auth: { username: formData.username, password: formData.password } })
             .then(res => {
                 const now = new Date(Number(res.headers?.expires));
                              

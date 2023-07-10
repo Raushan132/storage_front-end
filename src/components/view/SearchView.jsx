@@ -154,7 +154,7 @@ const SearchView = ({ search }) => {
         <>
 
             {trashes.length>0 && <div className='bg-base-200 h-12 flex items-center px-8 select-none mb-4'>Items in trash are deleted forever after 30 days</div>} 
-           
+            <div className='overflow-x-hidden h-[500px]'>
             <table className='table w-full'>
                 <thead>
                     <tr>
@@ -357,7 +357,7 @@ const SearchView = ({ search }) => {
                                     <td>{file.folder ? "-" : formatBytes(file.fileSize)}</td>
                                     {/* <td>{file?.public ? 'Yes' : 'No'}</td> */}
                                     <td>{getDate(file.dateOfOpened)}</td>
-                                    <td>Drive</td>
+                                    <td>Trash</td>
                                     <td>
                                     <div className={`dropdown  w-full flex justify-center `} >
                                         <label tabIndex={0}  className=" cursor-pointer" ><BsThreeDotsVertical /></label>
@@ -376,7 +376,7 @@ const SearchView = ({ search }) => {
 
             </table>
 
-
+        </div>
             <dialog id="deleted_search_forever" className="bg-transparent">
                 <form method="dialog" className="modal-box">
                     <h3 className="font-bold text-lg">Delete Forever!</h3>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Layout from '../../layout/layout'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,6 +16,9 @@ const EditProfile = () => {
     const {render} = useSelector(state=> state.isRender)
     const dispatch = useDispatch()
 
+    const themeStore = localStorage.getItem("theme");
+    const [theme, setTheme] = useState("dark")
+
     const validationSchema = Yup.object({
         fullName: Yup.string().required('Required'),
         mobile: Yup.number().min(10, "equal or more than 10 digit").typeError('number only'),
@@ -24,6 +27,19 @@ const EditProfile = () => {
 
 
     useEffect(() => {
+
+        switch (themeStore) {
+            case 'light':
+            case 'cupcake':
+            case 'wireframe':
+            case 'aqua': setTheme("light"); break;
+            case 'dark':
+            case 'forest':
+            case 'night':
+              
+             default: setTheme("dark");
+           }
+
         dispatch(fetchUsers());
     }, [render])
 
@@ -124,15 +140,15 @@ const EditProfile = () => {
                 
       <ToastContainer
           position="top-center"
-          autoClose={3000}
+          autoClose={2000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
           rtl={false}
-          pauseOnFocusLoss
+          pauseOnFocusLoss={false}
           draggable
-          pauseOnHover
-          theme="dark"
+          pauseOnHover={false}
+          theme={theme}
           />
             </Layout>
         </>

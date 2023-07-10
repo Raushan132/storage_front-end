@@ -1,10 +1,10 @@
 import { CiHardDrive } from 'react-icons/ci'
-import { AiFillStar, AiOutlineShareAlt, AiFillMessage, AiOutlineCloudUpload, AiFillFolder } from 'react-icons/ai'
+import { AiFillStar, AiOutlineShareAlt, AiFillMessage, AiOutlineCloudUpload, AiFillFolder, AiFillCloud } from 'react-icons/ai'
 import { FaTrashAlt } from 'react-icons/fa'
 import { GoPlus } from 'react-icons/go'
 import { RiFolderUploadFill } from 'react-icons/ri'
 import CreateFolder from '../activity/CreateFolder'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,6 +13,8 @@ import { baseUrl, getCookie, getUserId } from '../../redux/fetch/baseUrl'
 import RenameFile from '../activity/RenameFile'
 import { reRender } from '../../redux/render/renderAction'
 import ShareDialog from '../activity/ShareDialog'
+import formatBytes from '../../data/ByteFormat'
+import Logo from '../../assets/logo.png'
 
 
 const SideBar = () => {
@@ -25,6 +27,12 @@ const SideBar = () => {
     const {shareBtnVisible} = useSelector(state=> state.isShareBtnVisible)
     const isrenameFileVisible=visible
     const dispatch = useDispatch()
+
+    const [storage,setStorage]= useState({
+        used:0,
+        byte:0,
+        total:`1 GB`
+    })
    
     const handleCreateFolder = ()=>{
          if(!iscreateFolderVisible)
@@ -32,7 +40,26 @@ const SideBar = () => {
     }
 
 
+    useEffect(()=>{
+       
+            
+             axios.get(`${baseUrl}/storage`,{
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    'Authorization': getCookie()
+                  }
+            }).then(res=>{
+                const totalSize =res.data.totalSize;
+                const used = res.data.used;
+                const per =  Number((used*100)/totalSize).toFixed(2);
+                const size = formatBytes(totalSize);
+                const b = formatBytes(used);
+                setStorage(prev => ( {used:per,byte:b,total: size}));
+                
+            })
+      
 
+    },[render])
 
     const [progress, setProgress] = useState(0);
     const [cancelRequests,setCancelRequests] =useState()
@@ -151,10 +178,10 @@ const SideBar = () => {
             {isrenameFileVisible && <RenameFile/>}
            { shareBtnVisible && <ShareDialog />}
             <div className=' shadow-xl bg-base-200 h-screen fixed z-20'>
-                <div className=' px-8 my-16  w-full'>
+                <div className=' px-8 my-8  w-full'>
 
                     <div>
-                        <div> Eternal Space </div>
+                        <div className='w-36 h-32'> <img className='w-full h-full' draggable={false} src={Logo} alt="logo" /> </div>
                     </div>
                     <div className="mt-10 dropdown dropdown-right">
                         <label tabIndex={0} className="btn m-1"><GoPlus className='mr-2' /> New</label>
@@ -178,9 +205,14 @@ const SideBar = () => {
                         <li><Link to="/user/starred"><AiFillStar />Starred</Link></li>
                         <li><Link to="/user/shared-with-me"><AiOutlineShareAlt />Shared with me</Link></li>
                         <li><Link to="/user/messages"><AiFillMessage />Message</Link></li>
-                        <li><Link to="/user/trash"><FaTrashAlt />Trash</Link></li>
+                        <li><Link to="/user/trash"><FaTrashAlt />Dustbin</Link></li>
                     </ul>
 
+                    <div>
+                         <div className='flex gap-2 items-center px-4'><span><AiFillCloud /></span> <span>Storage</span></div>
+                         <div><progress className={`progress ${storage.used>85?'progress-error':'progress-success'} w-48 px-4`} value={storage.used<1?1:storage.used} max="100"></progress></div>
+                         <div className='flex gap-2 items-center px-4 text-[13px]'>{storage.byte} of {storage.total} used</div>
+                    </div>
 
                 </div>
             </div>

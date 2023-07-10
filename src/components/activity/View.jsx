@@ -19,6 +19,8 @@ const View = ({pathname}) => {
      breadcrumbs.push({pathname:'Starred',link:'/user/starred'})
   else if(useLocation().pathname.match('/user/trash'))
     breadcrumbs.push({pathname:'Trash',link:'/user/trash'})
+    else if(useLocation().pathname.match('/user/search'))
+    breadcrumbs.push({pathname:'Search',link:'/user/Search'})
 
 
   if(pathname!==''){
@@ -60,11 +62,11 @@ const View = ({pathname}) => {
       <div className='flex justify-between  items-center pr-8'>
         <Breadcrumbs path={breadcrumbs} />
         <div className='flex justify-center items-center gap-2'>
-          <div className="tooltip tooltip-bottom" data-tip={currentView === GRIDVIEW ? 'List' :'Grid'}>
+         { !useLocation().pathname.match('/user/search') && <div className="tooltip tooltip-bottom" data-tip={currentView === GRIDVIEW ? 'List' :'Grid'}>
             <div onClick={handleView} className='hover:bg-gray-500 rounded-full w-10 h-10 flex justify-center items-center transition-all cursor-pointer'>
               {currentView === GRIDVIEW ? <FaRegListAlt /> : <BsGrid3X2 />}
             </div>
-          </div>
+          </div>}
 
           <div className="tooltip tooltip-bottom" data-tip='view detail' onClick={handleViewDatails}>
             <div className='hover:bg-gray-500 rounded-full w-10 h-10 flex justify-center items-center transition-all cursor-pointer'>

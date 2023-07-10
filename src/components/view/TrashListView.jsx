@@ -154,7 +154,7 @@ const TrashListView = ({ data }) => {
                                         <Icon {...getFileTypeIconProps({ extension: file?.extension, size: 24 })} />
                                             <span>{file?.fileName?.length>22?file?.fileName?.substring(0, 20)+'...':file?.fileName}</span>
                                         </td>
-                                        <td>{file.fileType.length>15? file?.fileType?.substring(0, 20) + '...':file?.fileType}</td>
+                                        <td>{file?.fileType.length>15? file?.fileType?.substring(0, 20) + '...':file?.fileType}</td>
                                         <td>{formatBytes(file?.fileSize)}</td>
                                         <td>{getDate(date)}</td>
                                         <td>{file?.path.split('/')[1]}</td>

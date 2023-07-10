@@ -120,7 +120,7 @@ const GridView = ({ folders, files }) => {
                                         <li onClick={dropMenuClick} ><div onClick={()=>{console.log("here3000");dispatch(renameVisible(true))}}>Rename</div></li>
                                         <hr />
                                         <li onClick={dropMenuClick} ><div onClick={()=>{dispatch(viewDetailOpen())}}>View details</div></li>
-                                        <li><a>Download</a></li>
+                                        {/* <li><a>Download</a></li> */}
                                         <hr />
                                         <li onClick={dropMenuClick}><div onClick={()=>{handleRemove(folder.fileId)}}>Remove</div></li>
                                     </ul>
